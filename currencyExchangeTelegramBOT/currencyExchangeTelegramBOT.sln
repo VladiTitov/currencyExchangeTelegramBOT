@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "currencyExchangeTelegramBOT", "currencyExchangeTelegramBOT\currencyExchangeTelegramBOT.csproj", "{86370FF6-8C0E-495C-A7F7-3871AF0A632A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "currencyExchangeTelegramBOT", "currencyExchangeTelegramBOT\currencyExchangeTelegramBOT.csproj", "{86370FF6-8C0E-495C-A7F7-3871AF0A632A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Banks", "01-Banks", "{5F540FAA-D287-4D7B-9D7F-A56D40320838}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTBank", "MTBank\MTBank.csproj", "{2D49B47C-8215-48C0-8D43-EB094DDB19C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Core", "03-Core", "{A85D23DD-6437-4529-B5F9-5EC5DE61C569}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +21,17 @@ Global
 		{86370FF6-8C0E-495C-A7F7-3871AF0A632A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86370FF6-8C0E-495C-A7F7-3871AF0A632A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86370FF6-8C0E-495C-A7F7-3871AF0A632A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D49B47C-8215-48C0-8D43-EB094DDB19C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D49B47C-8215-48C0-8D43-EB094DDB19C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D49B47C-8215-48C0-8D43-EB094DDB19C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D49B47C-8215-48C0-8D43-EB094DDB19C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{86370FF6-8C0E-495C-A7F7-3871AF0A632A} = {A85D23DD-6437-4529-B5F9-5EC5DE61C569}
+		{2D49B47C-8215-48C0-8D43-EB094DDB19C2} = {5F540FAA-D287-4D7B-9D7F-A56D40320838}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {988AA9D4-6813-4813-9155-1B98E2D1B817}
