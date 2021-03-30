@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00-Tests", "00-Tests", "{E0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BanksTestConsole", "BanksTestConsole\BanksTestConsole.csproj", "{D23B6006-C8C3-4FAB-BC75-8A650942D6D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlParse", "HtmlParse\HtmlParse.csproj", "{8ED75786-79F3-4194-B9DE-97A154631E4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{D23B6006-C8C3-4FAB-BC75-8A650942D6D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D23B6006-C8C3-4FAB-BC75-8A650942D6D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D23B6006-C8C3-4FAB-BC75-8A650942D6D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ED75786-79F3-4194-B9DE-97A154631E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ED75786-79F3-4194-B9DE-97A154631E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ED75786-79F3-4194-B9DE-97A154631E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ED75786-79F3-4194-B9DE-97A154631E4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{104076E2-6207-46AE-98C6-F1A07B449B73} = {21DF38B2-9EE5-4009-9DA1-B1EFB99A41D9}
 		{D5AE1545-F6F1-4024-B004-38C2D068469A} = {F7007094-9B45-45E0-8720-43C312809332}
 		{D23B6006-C8C3-4FAB-BC75-8A650942D6D6} = {E01A7DD0-C677-47FE-B085-B45609CA6F8F}
+		{8ED75786-79F3-4194-B9DE-97A154631E4D} = {21DF38B2-9EE5-4009-9DA1-B1EFB99A41D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {988AA9D4-6813-4813-9155-1B98E2D1B817}
