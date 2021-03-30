@@ -26,7 +26,7 @@ namespace Core._01_TelegramCore
             botClient.StartReceiving();
         }
 
-        public static async void BotClient_OnMessage(object sender, MessageEventArgs e)
+        public async void BotClient_OnMessage(object sender, MessageEventArgs e)
         {
             var text = e?.Message?.Text;
 
@@ -37,30 +37,57 @@ namespace Core._01_TelegramCore
             await botClient.SendTextMessageAsync(chatId: e.Message.Chat, text: text, replyMarkup: _keyboard).ConfigureAwait(false);
         }
 
-        public static void ReturnAnswer(string msg, out string message, out ReplyKeyboardMarkup buttons)
+        public void ReturnAnswer(string msg, out string message, out ReplyKeyboardMarkup buttons)
         {
             switch (msg)
             {
                 case "/start":
-                    //BelarusbankClass belarusbank = new BelarusbankClass("https://belarusbank.by/api/kursExchange");
-                    //belarusbank.ReturnData();
-                    buttons = new ReplyKeyboardMarkup(new List<KeyboardButton>() { "Русский", "English" }, resizeKeyboard: true);
+                    buttons = new ReplyKeyboardMarkup(new List<KeyboardButton>()
+                    {
+                        "Русский", 
+                        "English"
+                    }, 
+                        resizeKeyboard: true);
                     message = "Выберите язык, на котором будем общаться/Select the language in which we will communicate";
                     break;
                 case "Русский":
-                    buttons = new ReplyKeyboardMarkup(new List<KeyboardButton>() { "USD=>BYN", "EUR=>BYN", "RUR=>BYN" }, resizeKeyboard: true);
-                    message = "Выберите интересующую Вас валютную операцию:";
+
+                    ReturnMsgAndButtons("Выберите интересующую Вас валюту: ", "USD - Доллар, EUR-Евро, RUB-Российский рубль");
+                    buttons = new ReplyKeyboardMarkup(new List<KeyboardButton>()
+                    {
+                        "USD-Доллар",
+                        "EUR-Евро", 
+                        "RUB-Российский рубль"
+                    }, 
+                        resizeKeyboard: true);
+                    message = "Выберите интересующую Вас валюту:";
                     break;
                 case "English":
-                    buttons = new ReplyKeyboardMarkup(new List<KeyboardButton>() { "USD=>BYN", "EUR=>BYN", "RUR=>BYN" }, resizeKeyboard: true);
-                    message = "Select the interesting foreign exchange operation:";
+                    buttons = new ReplyKeyboardMarkup(new List<KeyboardButton>()
+                    {
+                        "USD-Dollar",
+                        "EUR-Euro",
+                        "RUB-Russian ruble"
+                    }, 
+                        resizeKeyboard: true);
+                    message = "Select the currency you are interested in:";
                     break;
                 default:
-                    buttons = new ReplyKeyboardMarkup(new List<KeyboardButton>() { "Вернуться назад" }, resizeKeyboard: true);
+                    buttons = new ReplyKeyboardMarkup(new List<KeyboardButton>()
+                    {
+                        "Вернуться назад"
+                    }, 
+                        resizeKeyboard: true);
                     message = "Я не такой умный как Вы, перейдите к меню и выберите операцию";
                     break;
             }
         }
+
+        public (string Message, ReplyKeyboardMarkup Buttons) ReturnMsgAndButtons(string msg, string buttonsList)
+        {
+            return (msg, new ReplyKeyboardMarkup(new List<KeyboardButton>() {buttonsList}, resizeKeyboard: true));
+        }
+
 
     }
 }
