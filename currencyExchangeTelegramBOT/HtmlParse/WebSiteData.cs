@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Security;
+using System.Collections.ObjectModel;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -15,12 +13,31 @@ namespace HtmlParse
         //EUR = https://select.by/kurs-evro
         //RUB = https://select.by/kurs-rublya
 
-        public WebSiteData(string Part)
-        {
-            List<string> Addr = new List<string>();
+        IWebDriver driver = new ChromeDriver();
 
-            IWebDriver driver = new ChromeDriver();
-            driver.Url = @"https://select.by/kurs-" + $"{Part}";
+        public WebSiteData(string part) => driver.Url = @"https://select.by/kurs-" + $"{part}";
+
+        public void GetData()
+        {
+            var buttons = driver.FindElements(By.ClassName("expand"));
+            foreach (var btn in buttons) btn.Click();
+            Thread.Sleep(1000);
+            var hasChildRow = driver.FindElements(By.ClassName("tablesorter-hasChildRow"));
+
+
+            var childRow = driver.FindElements(By.ClassName("tablesorter-childRow"));
+            foreach (IWebElement e in childRow)
+            {
+                string data1 = e.Text;
+                data1 = e.GetAttribute("data-name");
+            }
+
+            driver.Close();
+        }
+
+        private void ReturnData(ReadOnlyCollection<IWebElement> bestDeal, ReadOnlyCollection<IWebElement> branches)
+        {
+            
         }
 
     }

@@ -7,8 +7,11 @@ namespace Banks._02_Classes
 {
     class Branches : IBank
     {
-        public string Phone { get; set; }
+        public string[] Phones { get; set; }
 
-        public Branches(List<string> branches) : base(branches) => Phone = branches[1];
+        public Branches(List<string> branches) : base(branches)
+        {
+
+        }
     }
 }
