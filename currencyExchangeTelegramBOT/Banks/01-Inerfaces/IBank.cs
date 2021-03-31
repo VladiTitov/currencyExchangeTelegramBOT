@@ -7,15 +7,15 @@ namespace Banks._01_Inerfaces
 {
     abstract class IBank
     {
-        public IBank(List<string> bestDeal)
+        public IBank(string name, double bestBuy, double bestSale)
         {
-            Name = bestDeal[0];
-            BestBuy = bestDeal[2];
-            BestSale = bestDeal[3];
+            Name = name;
+            BestBuy = bestBuy;
+            BestSale = bestSale;
         }
 
         public string Name { get; set; }
-        public string BestBuy { get; set; }
-        public string BestSale { get; set; }
+        public double BestBuy { get; set; }
+        public double BestSale { get; set; }
     }
 }

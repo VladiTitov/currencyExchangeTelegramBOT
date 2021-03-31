@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Banks._01_Inerfaces;
 
 namespace Banks._02_Classes
 {
     class Branches : IBank
     {
-        public string[] Phones { get; set; }
+        public List<string> Phones { get; set; }
 
-        public Branches(List<string> branches) : base(branches)
-        {
-
-        }
+        public Branches(string name, double bestBuy, double bestSale, string[] phones) :
+            base(name, bestBuy, bestSale) => Phones = phones.ToList();
     }
 }

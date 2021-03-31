@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Banks._01_Inerfaces;
 
 namespace Banks._02_Classes
@@ -9,13 +7,6 @@ namespace Banks._02_Classes
     {
         public List<Branches> Brancheses { get; set; }
 
-        public Bank(List<string> bestDeal) : base(bestDeal) { }
-
-
-        private void ReturnAddr(List<string> data)
-        {
-            data.RemoveRange(0, 3);
-            foreach (var d in data) { }
-        }
+        public Bank(string name, double bestBuy, double bestSale, List<Branches> brancheses) : base(name, bestBuy, bestSale) => Brancheses = brancheses;
     }
 }

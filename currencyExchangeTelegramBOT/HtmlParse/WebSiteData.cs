@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -19,25 +19,27 @@ namespace HtmlParse
 
         public void GetData()
         {
-            var buttons = driver.FindElements(By.ClassName("expand"));
+            #region Нажимаем на все кнопки чтобы активировать скрипты
+
+            ReadOnlyCollection<IWebElement> buttons = driver.FindElements(By.ClassName("expand"));
             foreach (var btn in buttons) btn.Click();
             Thread.Sleep(1000);
-            var hasChildRow = driver.FindElements(By.ClassName("tablesorter-hasChildRow"));
 
+            #endregion
 
-            var childRow = driver.FindElements(By.ClassName("tablesorter-childRow"));
-            foreach (IWebElement e in childRow)
-            {
-                string data1 = e.Text;
-                data1 = e.GetAttribute("data-name");
-            }
+            ReadOnlyCollection<IWebElement> elements = driver.FindElements(By.ClassName("tablesorter-childRow"));
+            foreach (IWebElement e in elements) ReturnData(e.FindElements(By.XPath(".//*/tbody/tr/td")));
 
             driver.Close();
         }
 
-        private void ReturnData(ReadOnlyCollection<IWebElement> bestDeal, ReadOnlyCollection<IWebElement> branches)
+        private static List<List<IWebElement>> ReturnData(ReadOnlyCollection<IWebElement> data)
         {
-            
+            return Enumerable.Range(0, data.Count / 3)
+                .Select(i => data.Skip(i * 3)
+                    .Take(3)
+                    .ToList())
+                .ToList();
         }
 
     }
