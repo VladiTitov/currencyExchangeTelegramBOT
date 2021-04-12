@@ -21,7 +21,7 @@ namespace Core._01_TelegramCore
             botClient = new TelegramBotClient(Token) { Timeout = TimeSpan.FromSeconds(10) };
             var me = botClient.GetMeAsync().Result;
 
-            Console.WriteLine($"{me.Id} and {me.FirstName}");
+            Console.WriteLine($"{me.Id} and {me.FirstName} started");
 
             botClient.OnMessage += BotClient_OnMessage;
             botClient.StartReceiving();
