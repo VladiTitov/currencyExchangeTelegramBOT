@@ -11,15 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Core", "02-Core", "{E167
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Logic", "03-Logic", "{F7007094-9B45-45E0-8720-43C312809332}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banks", "Banks\Banks.csproj", "{104076E2-6207-46AE-98C6-F1A07B449B73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banks", "Banks\Banks.csproj", "{104076E2-6207-46AE-98C6-F1A07B449B73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicApp", "LogicApp\LogicApp.csproj", "{D5AE1545-F6F1-4024-B004-38C2D068469A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicApp", "LogicApp\LogicApp.csproj", "{D5AE1545-F6F1-4024-B004-38C2D068469A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00-Tests", "00-Tests", "{E01A7DD0-C677-47FE-B085-B45609CA6F8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BanksTestConsole", "BanksTestConsole\BanksTestConsole.csproj", "{D23B6006-C8C3-4FAB-BC75-8A650942D6D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BanksTestConsole", "BanksTestConsole\BanksTestConsole.csproj", "{D23B6006-C8C3-4FAB-BC75-8A650942D6D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlParse", "HtmlParse\HtmlParse.csproj", "{8ED75786-79F3-4194-B9DE-97A154631E4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HtmlParse", "HtmlParse\HtmlParse.csproj", "{8ED75786-79F3-4194-B9DE-97A154631E4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

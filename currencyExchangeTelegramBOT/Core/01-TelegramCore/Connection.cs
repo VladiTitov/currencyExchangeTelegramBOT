@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core._02_Buttons;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.ReplyMarkups;
+using LogicApp;
+using LogicApp._01_Buttons;
 
 namespace Core._01_TelegramCore
 {
@@ -33,7 +34,9 @@ namespace Core._01_TelegramCore
 
             if (text == null) return;
 
-            new Buttons().ReturnAnswer(text, out text, out _keyboard);
+            new Button(text).ReturnButtons(out text, out _keyboard);
+
+            //new Buttons().ReturnAnswer(text, out text, out _keyboard);
 
             await botClient.SendTextMessageAsync(chatId: e.Message.Chat, text: text, replyMarkup: _keyboard).ConfigureAwait(false);
         }

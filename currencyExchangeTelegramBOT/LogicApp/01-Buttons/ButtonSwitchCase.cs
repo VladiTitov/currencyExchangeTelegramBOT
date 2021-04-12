@@ -1,22 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace Core._02_Buttons
+namespace LogicApp._01_Buttons
 {
-    class Buttons
+    class ButtonSwitchCase
     {
         public void ReturnAnswer(string msg, out string message, out ReplyKeyboardMarkup buttons)
         {
             switch (msg)
             {
                 case "/start":
-                    buttons = new ReplyKeyboardMarkup(new List<KeyboardButton>()
-                        {
-                            "Продать",
-                            "Купить"
-                        },
-                        resizeKeyboard: true);
-                    message = "Выберите необходимую операцию:";
+                    buttons = new ButtonsLogic("Лучший курс;Купить,Продать;Назад").ReturnMsgAndButtons();
+                    message = "Выберите интерисующую Вас операцию:";
                     break;
 
                 #region Мультиязычность
@@ -34,9 +31,6 @@ namespace Core._02_Buttons
                 #endregion
 
                 case "Русский":
-
-                    ReturnMsgAndButtons("Выберите интересующую Вас валюту: ",
-                        "USD - Доллар, EUR-Евро, RUB-Российский рубль");
                     buttons = new ReplyKeyboardMarkup(new List<KeyboardButton>()
                         {
                             "USD-Доллар $",
@@ -131,6 +125,8 @@ namespace Core._02_Buttons
                 #endregion
 
                 default:
+                    KeyboardButton key = new KeyboardButton();
+                    key.Text = "test";
                     buttons = new ReplyKeyboardMarkup(new List<KeyboardButton>()
                         {
                             "Вернуться назад"
@@ -140,9 +136,6 @@ namespace Core._02_Buttons
                     break;
             }
         }
-
-        private (string Message, ReplyKeyboardMarkup Buttons) ReturnMsgAndButtons(string msg, string buttonsList) =>
-            (msg, new ReplyKeyboardMarkup(new List<KeyboardButton>() {buttonsList}, resizeKeyboard: true));
 
         private string TranslateText(string inText) => inText;
 
