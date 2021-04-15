@@ -1,33 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Telegram.Bot.Types.ReplyMarkups;
+﻿using System.Collections.Generic;
 
 namespace LogicApp._01_Buttons
 {
     public class Button
     {
-        public string Text { get; set; }
-
-        public Button(string text) => Text = text;
-
-        public void ReturnButtons(out string message, out ReplyKeyboardMarkup buttons)
+        private Dictionary<int, string> buttonsDictionary = new Dictionary<int, string>()
         {
-            switch (Text)
+            [0] = "В начало",
+            [1] = "Назад",
+            [2] = "Лучший курс",
+            [3] = "Поиск по банкам",
+            [4] = "Поиск по локации",
+            [5] = "Список адресов",
+            [6] = "Список банков",
+            [7] = "Позвонить",
+            [8] = "Купить",
+            [9] = "Продать",
+        };
+
+
+        public int Id { get; }
+        private string Text { get; }
+        
+        public Button(string text)
+        {
+            Text = text;
+            Id = ReturnIdButton(text);
+        }
+
+
+        private int ReturnIdButton(string text)
+        {
+            foreach (var dict in buttonsDictionary)
             {
-                case "/start":
-                    buttons = new ButtonsLogic("Лучший курс;Купить,Продать;Назад").ReturnMsgAndButtons();
-                    message = "Выберите интерисующую Вас операцию:";
-                    break;
-                default:
-                    buttons = new ReplyKeyboardMarkup(new List<KeyboardButton>()
-                        {
-                            "Вернуться назад"
-                        },
-                        resizeKeyboard: true);
-                    message = "Я не такой умный как Вы, перейдите к меню и выберите операцию";
-                    break;
+                if (dict.Value == text) return dict.Key;
             }
+            return 0;
+        }
+
+        private string DropBtnName(string text)
+        {
+
+
+            return "";
+        }
+    }
+
+    public struct ButtonMenu
+    {
+        private Button firstButtonLine;
+        private List<Button> secondButtonLine;
+        private Button thirdButtonLine;
+
+        public ButtonMenu(Button _first, List<Button> _second, Button _third)
+        {
+            firstButtonLine = _first;
+            secondButtonLine = _second;
+            thirdButtonLine = _third;
         }
     }
 }

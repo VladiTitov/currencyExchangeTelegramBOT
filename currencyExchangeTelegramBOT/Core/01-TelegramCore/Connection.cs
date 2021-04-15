@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.ReplyMarkups;
 using LogicApp;
 using LogicApp._01_Buttons;
+using LogicApp._02_MenuBot;
 
 namespace Core._01_TelegramCore
 {
@@ -34,11 +36,12 @@ namespace Core._01_TelegramCore
 
             if (text == null) return;
 
-            new Button(text).ReturnButtons(out text, out _keyboard);
+            ArchitectureMenu.MenuButtonEvent(new Button(text), out text, out _keyboard);
 
-            //new Buttons().ReturnAnswer(text, out text, out _keyboard);
+            //new Button(text).ReturnButtons(out text, out _keyboard);
 
-            await botClient.SendTextMessageAsync(chatId: e.Message.Chat, text: text, replyMarkup: _keyboard).ConfigureAwait(false);
+            await botClient.SendTextMessageAsync(chatId: e.Message.Chat, text: text, replyMarkup: _keyboard)
+                .ConfigureAwait(false);
         }
     }
 }

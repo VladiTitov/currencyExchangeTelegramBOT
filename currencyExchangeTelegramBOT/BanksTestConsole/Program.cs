@@ -34,7 +34,7 @@ namespace BanksTestConsole
 
             driver.Close();
             Console.ReadLine();
-        }
+        } 
 
         private static List<List<IWebElement>> DropData(ReadOnlyCollection<IWebElement> data)
         {
