@@ -16,15 +16,16 @@ namespace LogicApp._01_Buttons
             [7] = "Позвонить",
             [8] = "Купить",
             [9] = "Продать",
+            [10] = "USD",
+            [11] = "EUR",
+            [12] = "RUB"
         };
 
 
         public int Id { get; }
-        private string Text { get; }
-        
+
         public Button(string text)
         {
-            Text = text;
             Id = ReturnIdButton(text);
         }
 
