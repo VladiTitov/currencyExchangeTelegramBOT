@@ -9,4 +9,8 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="89.0.4389.2300" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Banks\Banks.csproj" />
+  </ItemGroup>
+
 </Project>

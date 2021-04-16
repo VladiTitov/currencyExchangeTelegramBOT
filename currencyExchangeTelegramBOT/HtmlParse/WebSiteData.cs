@@ -1,24 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using Banks._02_Classes;
 
 namespace HtmlParse
 {
-    class WebSiteData
+    public class WebSiteData
     {
         //USD = https://select.by/kurs-dollara
         //EUR = https://select.by/kurs-evro
         //RUB = https://select.by/kurs-rublya
 
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
 
-        public WebSiteData(string part) => driver.Url = @"https://select.by/kurs-" + $"{part}";
-
-        public void GetData()
+        public WebSiteData(string part)
         {
+            driver = new ChromeDriver(
+                    "C:\\Users\\Legion.DESKTOP-0QV9H6M\\source\\repos\\currencyExchangeTelegramBOT\\currencyExchangeTelegramBOT\\HtmlParse\\bin\\Debug\\netcoreapp3.1\\"
+                    ) {Url = @"https://select.by/kurs-" + $"{part}" };
+        }
+
+        public List<Bank> GetData()
+        {
+            List<Bank> banks = new List<Bank>();
             #region Нажимаем на все кнопки чтобы активировать скрипты
 
             ReadOnlyCollection<IWebElement> buttons = driver.FindElements(By.ClassName("expand"));
@@ -28,18 +36,45 @@ namespace HtmlParse
             #endregion
 
             ReadOnlyCollection<IWebElement> elements = driver.FindElements(By.ClassName("tablesorter-childRow"));
-            foreach (IWebElement e in elements) ReturnData(e.FindElements(By.XPath(".//*/tbody/tr/td")));
+            foreach (IWebElement e in elements)
+                banks.Add(BankData(DropData(e.FindElements(By.XPath(".//*/tbody/tr/td")))));
 
             driver.Close();
+            return banks;
         }
 
-        private static List<List<IWebElement>> ReturnData(ReadOnlyCollection<IWebElement> data)
+        private static List<List<IWebElement>> DropData(ReadOnlyCollection<IWebElement> data)
         {
             return Enumerable.Range(0, data.Count / 3)
                 .Select(i => data.Skip(i * 3)
                     .Take(3)
                     .ToList())
                 .ToList();
+        }
+
+        private static Bank BankData(List<List<IWebElement>> data)
+        {
+            string BankName = "";
+            List<Branches> brancheses = new List<Branches>();
+            foreach (var d in data)
+            {
+                var Data = ParseData(d);
+                BankName = Data.NameBank;
+                brancheses.Add(new Branches(Data.AddrBank, Data.BestBuy, Data.BestSale, Data.Phones));
+            }
+
+            return new Bank(BankName,
+                brancheses.Select(a => a.BestBuy).Max(),
+                brancheses.Select(a => a.BestSale).Min(),
+                brancheses);
+        }
+
+        private static (string NameBank, string AddrBank, string[] Phones, double BestBuy, double BestSale) ParseData(List<IWebElement> elements)
+        {
+            string[] nameAndAddr = elements[0].FindElement(By.ClassName("btn-tomap")).GetAttribute("data-name").Split(": ");
+            string[] phones = elements[0].FindElement(By.ClassName("phones")).Text.Split("\r\n");
+
+            return (nameAndAddr[0], nameAndAddr[1], phones, Convert.ToDouble(elements[1].Text), Convert.ToDouble(elements[2].Text));
         }
 
     }

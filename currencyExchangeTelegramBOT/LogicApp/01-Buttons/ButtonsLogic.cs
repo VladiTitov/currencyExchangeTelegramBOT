@@ -18,6 +18,8 @@ namespace LogicApp
         public ButtonsLogic(string buttonsList)
         {
             ButtonList = buttonsList;
+            //
+            new BanksData();
         }
 
 

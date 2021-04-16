@@ -7,50 +7,57 @@ namespace LogicApp._02_MenuBot
     {
         public static int State { get; set; } = 0;
 
-        public static void MenuButtonEvent(Button btn, out string message, out ReplyKeyboardMarkup buttons)
+        public static void MenuButtonEvent(Button btn, out string message, out IReplyMarkup buttons)
         {
-            MenuStep(btn.Id);
-            buttons = MenuState(State);
+            MenuStep(btn.Text);
+            buttons = new ButtonsLogic(MenuState(State)).ReturnMsgAndButtons();
             message = "Выберите нужную операцию:";
         }
 
-        private static void MenuStep(int id)
+        private static void MenuStep(string text)
         {
-            switch (id)
+            switch (text)
             {
-                case 0:
+                case "/start":
                     State = 1;
                     break;
-                case 1:
-                    State--;
-                    break;
-                default:
+                case "Купить":
                     State++;
+                    //параметр покупки
+                    break;
+                case "Продать":
+                    State++;
+                    //параметр продажи
+                    break;
+                case "USD":
+                    State++;
+                    //парамерт валюты
+                    break;
+                case "EUR":
+                    State++;
+                    //парамерт валюты
+                    break;
+                case "RUB":
+                    State++;
+                    //парамерт валюты
+                    break;
+                case "Назад":
+                    State--;
                     break;
             }
         }
 
-        private static ReplyKeyboardMarkup MenuState(int state)
+        private static string MenuState(int state)
         {
-            switch (state)
+            return state switch
             {
-                case 1:
-                    return new ButtonsLogic("USD,EUR,RUB").ReturnMsgAndButtons();
-                case 2:
-                    return new ButtonsLogic("Купить,Продать;Назад").ReturnMsgAndButtons();
-                case 3:
-                    return new ButtonsLogic("Лучший курс;Поиск по банкам,Поиск по локации;Назад").ReturnMsgAndButtons();
-                case 4:
-                    return new ButtonsLogic("Список банков-курс;Назад").ReturnMsgAndButtons();
-                case 5:
-                    return new ButtonsLogic("Лучший курс-курс;Список адресов,Поиск ближайшего отделения;Назад").ReturnMsgAndButtons();
-                case 6:
-                    return new ButtonsLogic("Адрес-курс;Назад").ReturnMsgAndButtons();
-                case 7:
-                    return new ButtonsLogic("Позвонить,Адрес;Назад").ReturnMsgAndButtons();
-                default:
-                    return new ButtonsLogic("В начало").ReturnMsgAndButtons();
-            }
+                1 => "USD,EUR,RUB",
+                2 => "Купить,Продать;Назад",
+                3 => "Лучший курс;Поиск по банкам,Поиск по локации;Назад",
+                4 => "Список адресов,Поиск ближайшего отделения;Назад",
+                5 => "Позвонить,Адрес;Назад",
+                _ => "В начало"
+            };
         }
     }
 }

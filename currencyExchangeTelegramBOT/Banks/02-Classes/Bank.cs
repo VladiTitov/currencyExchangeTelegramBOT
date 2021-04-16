@@ -3,7 +3,7 @@ using Banks._01_Inerfaces;
 
 namespace Banks._02_Classes
 {
-    class Bank : IBank
+    public class Bank : IBank
     {
         public List<Branches> Brancheses { get; set; }
 

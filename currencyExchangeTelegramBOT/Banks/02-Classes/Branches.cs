@@ -4,7 +4,7 @@ using Banks._01_Inerfaces;
 
 namespace Banks._02_Classes
 {
-    class Branches : IBank
+    public class Branches : IBank
     {
         public List<string> Phones { get; set; }
 

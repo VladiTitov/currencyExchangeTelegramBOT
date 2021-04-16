@@ -5,7 +5,7 @@ using Banks._02_Classes;
 
 namespace Banks._01_Inerfaces
 {
-    abstract class IBank
+    public abstract class IBank
     {
         public IBank(string name, double bestBuy, double bestSale)
         {
