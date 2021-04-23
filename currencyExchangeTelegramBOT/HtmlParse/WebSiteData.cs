@@ -17,7 +17,6 @@ namespace HtmlParse
 
         public void GetData()
         {
-            List<Bank> banks = new List<Bank>();
             #region Нажимаем на все кнопки чтобы активировать скрипты
 
             ReadOnlyCollection<IWebElement> buttons = Driver.FindElements(By.ClassName("expand"));

@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BanksTestConsole", "BanksTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HtmlParse", "HtmlParse\HtmlParse.csproj", "{8ED75786-79F3-4194-B9DE-97A154631E4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlLiteData", "SqlLiteData\SqlLiteData.csproj", "{FBAC1387-0035-42EC-97EB-25729C12484B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{8ED75786-79F3-4194-B9DE-97A154631E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ED75786-79F3-4194-B9DE-97A154631E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ED75786-79F3-4194-B9DE-97A154631E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBAC1387-0035-42EC-97EB-25729C12484B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBAC1387-0035-42EC-97EB-25729C12484B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBAC1387-0035-42EC-97EB-25729C12484B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBAC1387-0035-42EC-97EB-25729C12484B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{D5AE1545-F6F1-4024-B004-38C2D068469A} = {F7007094-9B45-45E0-8720-43C312809332}
 		{D23B6006-C8C3-4FAB-BC75-8A650942D6D6} = {E01A7DD0-C677-47FE-B085-B45609CA6F8F}
 		{8ED75786-79F3-4194-B9DE-97A154631E4D} = {21DF38B2-9EE5-4009-9DA1-B1EFB99A41D9}
+		{FBAC1387-0035-42EC-97EB-25729C12484B} = {21DF38B2-9EE5-4009-9DA1-B1EFB99A41D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {988AA9D4-6813-4813-9155-1B98E2D1B817}

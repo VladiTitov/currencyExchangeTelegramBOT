@@ -45,8 +45,9 @@ namespace Core._01_TelegramCore
 
             ArchitectureMenu.MenuButtonEvent(new Button(text), out text, out _markup);
 
-            //var betaControl3 = new InlineKeyboardButton() {Text = "test1", CallbackData = "1"};
-            //_btnMessage = new InlineKeyboardMarkup(new []{betaControl3});
+            var betaControl3 = new InlineKeyboardButton() {Text = "test1", CallbackData = "1"};
+            var betaControl4 = new InlineKeyboardButton() {};
+            _markup = new InlineKeyboardMarkup(new []{betaControl3});
 
             await SendMessage(e.Message.Chat, text, _markup);
         }
