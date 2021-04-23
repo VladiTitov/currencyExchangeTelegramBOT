@@ -26,8 +26,8 @@ namespace Core
             Connection connection = new Connection("1401702551:AAHrr7hEYPKXLXdLgvI6zWYsxgzA-Ra24ms");
             connection.Start();
 
-            IWebDriver driver = new ChromeDriver() { Url = @"https://select.by/kurs-dollara" };
-            var pr = new WebSiteData(driver).GetData();
+            IWebDriver driver = new ChromeDriver() { Url = @"https://m.select.by/kurs-dollara" };
+            new WebSiteData(driver).GetData();
 
             Console.ReadLine();
         }

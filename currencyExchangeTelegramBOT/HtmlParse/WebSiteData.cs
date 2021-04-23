@@ -15,7 +15,7 @@ namespace HtmlParse
 
         public WebSiteData(IWebDriver driver) => Driver = driver;
 
-        public List<Bank> GetData()
+        public void GetData()
         {
             List<Bank> banks = new List<Bank>();
             #region Нажимаем на все кнопки чтобы активировать скрипты
@@ -29,15 +29,13 @@ namespace HtmlParse
             ReadOnlyCollection<IWebElement> elements = Driver.FindElements(By.ClassName("tablesorter-childRow"));
             foreach (IWebElement e in elements)
             {
-                var element = e.FindElements(By.XPath(".//*/tbody/tr/td"));
-                var dropElement = DropData(element);
-                var allBankBransches = BankData(dropElement);
+                ReadOnlyCollection<IWebElement> data = e.FindElements(By.XPath(".//*/tbody/tr/td"));
+                List<List<IWebElement>> elementsList = DropData(data);
+                var pr = BankData(elementsList);
             }
-
-            return banks;
         }
 
-        private static List<List<IWebElement>> DropData(ReadOnlyCollection<IWebElement> data)
+        private List<List<IWebElement>> DropData(ReadOnlyCollection<IWebElement> data)
         {
             return Enumerable.Range(0, data.Count / 3)
                 .Select(i => data.Skip(i * 3)
@@ -46,20 +44,22 @@ namespace HtmlParse
                 .ToList();
         }
 
-        private static List<Branches> BankData(List<List<IWebElement>> data)
+        private (string bankName, List<Branches> brancheses) BankData(List<List<IWebElement>> data)
         {
+            string BankName = "";
             List<Branches> brancheses = new List<Branches>();
             foreach (var _data in data)
             {
-                brancheses.Add(ParseData(_data));
+                brancheses.Add(ParseData(_data, out BankName));
             }
-            return brancheses;
+            return (BankName, brancheses);
         }
 
-        private static Branches ParseData(List<IWebElement> elements)
+        private Branches ParseData(List<IWebElement> elements, out string name)
         {
             string[] nameAndAddr = elements[0].FindElement(By.ClassName("btn-tomap")).GetAttribute("data-name").Split(": ");
             string[] phones = elements[0].FindElement(By.ClassName("phones")).Text.Split("\r\n");
+            name = nameAndAddr[0];
             return new Branches(nameAndAddr[1], Convert.ToDouble(elements[1].Text), Convert.ToDouble(elements[2].Text), phones);
         }
 
