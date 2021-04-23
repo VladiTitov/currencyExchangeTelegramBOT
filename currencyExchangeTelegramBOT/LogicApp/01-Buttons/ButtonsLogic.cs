@@ -19,7 +19,7 @@ namespace LogicApp
         {
             ButtonList = buttonsList;
             //
-            new BanksData();
+            //new BanksData();
         }
 
 

@@ -11,35 +11,29 @@ namespace HtmlParse
 {
     public class WebSiteData
     {
-        //USD = https://select.by/kurs-dollara
-        //EUR = https://select.by/kurs-evro
-        //RUB = https://select.by/kurs-rublya
+        private IWebDriver Driver { get; }
 
-        IWebDriver driver;
-
-        public WebSiteData(string part)
-        {
-            driver = new ChromeDriver(
-                    "C:\\Users\\Legion.DESKTOP-0QV9H6M\\source\\repos\\currencyExchangeTelegramBOT\\currencyExchangeTelegramBOT\\HtmlParse\\bin\\Debug\\netcoreapp3.1\\"
-                    ) {Url = @"https://select.by/kurs-" + $"{part}" };
-        }
+        public WebSiteData(IWebDriver driver) => Driver = driver;
 
         public List<Bank> GetData()
         {
             List<Bank> banks = new List<Bank>();
             #region Нажимаем на все кнопки чтобы активировать скрипты
 
-            ReadOnlyCollection<IWebElement> buttons = driver.FindElements(By.ClassName("expand"));
+            ReadOnlyCollection<IWebElement> buttons = Driver.FindElements(By.ClassName("expand"));
             foreach (var btn in buttons) btn.Click();
             Thread.Sleep(1000);
 
             #endregion
 
-            ReadOnlyCollection<IWebElement> elements = driver.FindElements(By.ClassName("tablesorter-childRow"));
+            ReadOnlyCollection<IWebElement> elements = Driver.FindElements(By.ClassName("tablesorter-childRow"));
             foreach (IWebElement e in elements)
-                banks.Add(BankData(DropData(e.FindElements(By.XPath(".//*/tbody/tr/td")))));
+            {
+                var element = e.FindElements(By.XPath(".//*/tbody/tr/td"));
+                var dropElement = DropData(element);
+                var allBankBransches = BankData(dropElement);
+            }
 
-            driver.Close();
             return banks;
         }
 
@@ -52,29 +46,21 @@ namespace HtmlParse
                 .ToList();
         }
 
-        private static Bank BankData(List<List<IWebElement>> data)
+        private static List<Branches> BankData(List<List<IWebElement>> data)
         {
-            string BankName = "";
             List<Branches> brancheses = new List<Branches>();
-            foreach (var d in data)
+            foreach (var _data in data)
             {
-                var Data = ParseData(d);
-                BankName = Data.NameBank;
-                brancheses.Add(new Branches(Data.AddrBank, Data.BestBuy, Data.BestSale, Data.Phones));
+                brancheses.Add(ParseData(_data));
             }
-
-            return new Bank(BankName,
-                brancheses.Select(a => a.BestBuy).Max(),
-                brancheses.Select(a => a.BestSale).Min(),
-                brancheses);
+            return brancheses;
         }
 
-        private static (string NameBank, string AddrBank, string[] Phones, double BestBuy, double BestSale) ParseData(List<IWebElement> elements)
+        private static Branches ParseData(List<IWebElement> elements)
         {
             string[] nameAndAddr = elements[0].FindElement(By.ClassName("btn-tomap")).GetAttribute("data-name").Split(": ");
             string[] phones = elements[0].FindElement(By.ClassName("phones")).Text.Split("\r\n");
-
-            return (nameAndAddr[0], nameAndAddr[1], phones, Convert.ToDouble(elements[1].Text), Convert.ToDouble(elements[2].Text));
+            return new Branches(nameAndAddr[1], Convert.ToDouble(elements[1].Text), Convert.ToDouble(elements[2].Text), phones);
         }
 
     }
