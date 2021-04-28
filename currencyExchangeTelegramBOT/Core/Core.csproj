@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LogicApp\LogicApp.csproj" />
+    <ProjectReference Include="..\SqlLiteData\SqlLiteData.csproj" />
   </ItemGroup>
 
 </Project>

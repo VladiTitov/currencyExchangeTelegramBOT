@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SqlLiteData
 {
-    class DataContext : DbContext
+    public class DataContext : DbContext
     {
         public DbSet<Bank> Banks { get; set; }
         public DbSet<City> Cities { get; set; }
