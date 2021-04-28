@@ -4,6 +4,8 @@ namespace Banks._02_Classes
 {
     public class Bank : IStructure
     {
+        public Bank() { }
+
         public Bank(int id, string nameLat, string nameRus) : base(id, nameLat, nameRus) { }
     }
 }
