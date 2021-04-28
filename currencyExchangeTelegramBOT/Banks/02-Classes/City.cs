@@ -2,7 +2,7 @@
 
 namespace Banks._02_Classes
 {
-    class City : IStructure
+    public class City : IStructure
     {
         public City(int id, string nameLat, string nameRus) : base(id, nameLat, nameRus) { }
     }
