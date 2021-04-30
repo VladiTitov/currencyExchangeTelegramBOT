@@ -15,13 +15,30 @@ namespace HtmlParse
 
         public WebSiteData(IWebDriver driver) => Driver = driver;
 
-        public void GetData()
+        public List<Currency> GetCurrencies()
         {
+            List<Currency> currencies = ReturnListValues<Currency>(".//*/div/select/option");
+            return currencies;
+        }
+
+        public List<City> GetCities()
+        {
+            List<City> cities = ReturnListValues<City>(".//*/li/select/option");
+            return cities;
+        }
+
+        public List<Branches> GetData()
+        {
+            List<Branches> brancheses = new List<Branches>();
+
             #region Нажимаем на все кнопки чтобы активировать скрипты
 
             ReadOnlyCollection<IWebElement> buttons = Driver.FindElements(By.ClassName("expand"));
-            foreach (var btn in buttons) btn.Click();
-            Thread.Sleep(1000);
+            foreach (var btn in buttons)
+            {
+                Thread.Sleep(500);
+                btn.Click();
+            }
 
             #endregion
 
@@ -30,8 +47,27 @@ namespace HtmlParse
             {
                 ReadOnlyCollection<IWebElement> data = e.FindElements(By.XPath(".//*/tbody/tr/td"));
                 List<List<IWebElement>> elementsList = DropData(data);
-                var pr = BankData(elementsList);
+                brancheses = BankData(elementsList);
             }
+            return brancheses;
+        }
+
+        private List<T> ReturnListValues<T>(string xPath)
+        {
+            List<T> result = new List<T>();
+            ReadOnlyCollection<IWebElement> values = Driver.FindElements(By.XPath(xPath));
+            for (int i = 1; i < values.Count; i++)
+            {
+                result.Add((T)Activator.CreateInstance(typeof(T), new object[]
+                {
+                    $"{typeof(T).Name}{i}", 
+                    "lat", 
+                    values[i].Text, 
+                    values[i].GetAttribute("value")
+                }));
+            }
+
+            return result;
         }
 
         private List<List<IWebElement>> DropData(ReadOnlyCollection<IWebElement> data)
@@ -43,23 +79,29 @@ namespace HtmlParse
                 .ToList();
         }
 
-        private (string bankName, List<Branches> brancheses) BankData(List<List<IWebElement>> data)
+        private List<Branches> BankData(List<List<IWebElement>> data)
         {
-            string BankName = "";
             List<Branches> brancheses = new List<Branches>();
             foreach (var _data in data)
             {
-                brancheses.Add(ParseData(_data, out BankName));
+                brancheses.Add(ParseData(_data));
             }
-            return (BankName, brancheses);
+            return brancheses;
         }
 
-        private Branches ParseData(List<IWebElement> elements, out string name)
+        private Branches ParseData(List<IWebElement> elements)
         {
             string[] nameAndAddr = elements[0].FindElement(By.ClassName("btn-tomap")).GetAttribute("data-name").Split(": ");
-            string[] phones = elements[0].FindElement(By.ClassName("phones")).Text.Split("\r\n");
-            name = nameAndAddr[0];
-            return new Branches(nameAndAddr[1], Convert.ToDouble(elements[1].Text), Convert.ToDouble(elements[2].Text), phones);
+            //var phoness = elements[0].FindElement(By.TagName("span"));
+            //var phones = phoness.FindElement(By.TagName("a")).Text;
+
+            string key = $"{nameAndAddr[0]}-{new Random().Next(1, 8000)}";
+            string addr = nameAndAddr[1];
+            string bestBuy = elements[1].Text;
+            string bestSale = elements[2].Text;
+            string phones = "";
+
+            return new Branches(key, addr, bestBuy, bestSale, phones);
         }
 
     }

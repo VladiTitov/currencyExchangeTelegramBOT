@@ -10,14 +10,9 @@ namespace Core
     {
         static void Main(string[] args)
         {
-            new DataBaseService().Data();
-
             Connection connection = new Connection("1401702551:AAHrr7hEYPKXLXdLgvI6zWYsxgzA-Ra24ms");
+            new DataBaseService().Start();
             connection.Start();
-            
-            //IWebDriver driver = new ChromeDriver() { Url = @"https://m.select.by/kurs-dollara" };
-            IWebDriver driver = new ChromeDriver() { Url = @"https://select.by/kurs" };
-            new WebSiteData(driver).GetData();
 
             Console.ReadLine();
         }

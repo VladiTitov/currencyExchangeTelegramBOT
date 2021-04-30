@@ -4,11 +4,15 @@ using Banks._01_Inerfaces;
 
 namespace Banks._02_Classes
 {
-    public class Branches : IBank
+    public class Branches : IBranch
     {
-        public List<string> Phones { get; set; }
+        public string Phones { get; set; }
 
-        public Branches(string name, double bestBuy, double bestSale, string[] phones) :
-            base(name, bestBuy, bestSale) => Phones = phones.ToList();
+        public Branches() { }
+
+        public Branches(string key, string addr, string bestBuy, string bestSale, string phones) : base(key, addr, bestBuy, bestSale, phones)
+        {
+
+        }
     }
 }
