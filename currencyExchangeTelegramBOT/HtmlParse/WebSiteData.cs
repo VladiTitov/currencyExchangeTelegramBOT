@@ -36,7 +36,7 @@ namespace HtmlParse
             ReadOnlyCollection<IWebElement> buttons = Driver.FindElements(By.ClassName("expand"));
             foreach (var btn in buttons)
             {
-                Thread.Sleep(500);
+                Thread.Sleep(200);
                 btn.Click();
             }
 
@@ -47,7 +47,7 @@ namespace HtmlParse
             {
                 ReadOnlyCollection<IWebElement> data = e.FindElements(By.XPath(".//*/tbody/tr/td"));
                 List<List<IWebElement>> elementsList = DropData(data);
-                brancheses = BankData(elementsList);
+                brancheses.AddRange(BankData(elementsList));
             }
             return brancheses;
         }
@@ -92,8 +92,6 @@ namespace HtmlParse
         private Branches ParseData(List<IWebElement> elements)
         {
             string[] nameAndAddr = elements[0].FindElement(By.ClassName("btn-tomap")).GetAttribute("data-name").Split(": ");
-            //var phoness = elements[0].FindElement(By.TagName("span"));
-            //var phones = phoness.FindElement(By.TagName("a")).Text;
 
             string key = $"{nameAndAddr[0]}-{new Random().Next(1, 8000)}";
             string addr = nameAndAddr[1];

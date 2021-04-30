@@ -115,7 +115,7 @@ namespace Core._01_TelegramCore
     {
         public DataTask()
         {
-            Schedule(() => new DataBaseService().Start()).ToRunEvery(1).Minutes();
+            Schedule(() => new DataBaseService().Start()).ToRunEvery(10).Minutes();
         }
     }
 }
