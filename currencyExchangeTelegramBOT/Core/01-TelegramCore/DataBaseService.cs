@@ -14,16 +14,22 @@ namespace Core._01_TelegramCore
 {
     public class DataBaseService
     {
+        private string ConnectionString { get; set; } = "Data Source=../data.db";
+
         public void Start()
         {
-            List<Currency> currencies = GetData();
-            List<City> cities;
+            List<Currency> currencies = new List<Currency>();
 
-            if (currencies.Count == 0)
+            try
+            {
+                currencies = new CurrencyRepo(ConnectionString).GetCurrencies();
+            }
+            catch
             {
                 ParseData<Currency>("/kurs");
-                this.Start();
             }
+
+            if (currencies.Count() == 0) ParseData<Currency>("/kurs");
 
             foreach (Currency c in currencies)
             {
@@ -43,69 +49,17 @@ namespace Core._01_TelegramCore
                 {
                     case "City":
                         List<City> cities = new WebSiteData(driver).GetCities();
-                        Insert(cities);
                         break;
                     case "Currency":
                         List<Currency> currencies = new WebSiteData(driver).GetCurrencies();
-                        Insert(currencies);
+                        new CurrencyRepo(ConnectionString).Add(currencies);
                         break;
                     case "Branches":
                         List<Branches> branches = new WebSiteData(driver).GetData();
-                        Insert(branches);
                         break;
                 }
                 driver.Close();
             }
-        }
-
-        public void Insert<T>(List<T> data)
-        {
-            using (DataContext db = new DataContext())
-            {
-                switch (typeof(T).Name)
-                {
-                    case "City":
-                        db.Cities.AddRange((IEnumerable<City>) data);
-                        break;
-                    case "Currency":
-                        db.Currencies.AddRange((IEnumerable<Currency>)data);
-                        break;
-                    case "Branches":
-                        db.Brancheses.AddRange((IEnumerable<Branches>)data);
-                        break;
-                }
-                db.SaveChanges();
-            }
-        }
-
-        public void Update<T>(List<T> data)
-        {
-            using (DataContext db = new DataContext())
-            {
-                switch (typeof(T).Name)
-                {
-                    case "City":
-                        db.Cities.UpdateRange((IEnumerable<City>)data);
-                        break;
-                    case "Currency":
-                        db.Currencies.UpdateRange((IEnumerable<Currency>)data);
-                        break;
-                    case "Branches":
-                        db.Brancheses.UpdateRange((IEnumerable<Branches>)data);
-                        break;
-                }
-                db.SaveChanges();
-            }
-        }
-
-        public List<Currency> GetData()
-        {
-            List<Currency> currencies;
-            using (DataContext db = new DataContext())
-            {
-                currencies = db.Currencies.ToList();
-            }
-            return currencies;
         }
 
         
