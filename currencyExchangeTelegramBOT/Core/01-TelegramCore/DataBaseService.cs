@@ -37,6 +37,11 @@ namespace Core._01_TelegramCore
             }
         }
 
+        private void CheckTables()
+        {
+
+        }
+
         public void ParseData<T>(string partUrl)
         {
             List<T> data = new List<T>();
@@ -48,7 +53,9 @@ namespace Core._01_TelegramCore
                 switch (typeof(T).Name)
                 {
                     case "City":
-                        List<City> cities = new WebSiteData(driver).GetCities();
+
+                        List<City> citiesValue = new WebSiteData(driver).GetCities();
+                        var cities = new ITableModel<City>("").GetData();
                         break;
                     case "Currency":
                         List<Currency> currencies = new WebSiteData(driver).GetCurrencies();

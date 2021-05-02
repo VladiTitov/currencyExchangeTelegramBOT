@@ -15,16 +15,15 @@ namespace HtmlParse
 
         public WebSiteData(IWebDriver driver) => Driver = driver;
 
-        public List<Currency> GetCurrencies()
+        public List<T> GeParseData<T>()
         {
-            List<Currency> currencies = ReturnListValues<Currency>(".//*/div/select/option");
-            return currencies;
-        }
-
-        public List<City> GetCities()
-        {
-            List<City> cities = ReturnListValues<City>(".//*/li/select/option");
-            return cities;
+            switch (typeof(T).Name)
+            {
+                case "Currency":
+                    return ReturnListValues<T>(".//*/div/select/option");
+                default:
+                    return ReturnListValues<T>(".//*/li/select/option");
+            }
         }
 
         public List<Branches> GetData()

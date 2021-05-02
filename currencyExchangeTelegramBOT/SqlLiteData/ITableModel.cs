@@ -2,29 +2,17 @@
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
-using Banks._02_Classes;
 using Dapper;
 
 namespace SqlLiteData
 {
-    public interface ICurrencyRepo<T>
-    {
-        void Add(T data);
-        void Add(List<T> data);
-        void Delete(int id);
-        T Get(int id);
-        List<T> GetCurrencies();
-        void Update(T data);
-        void Create();
-    }
-
-    public class CurrencyRepo : ICurrencyRepo<Currency>
+    public class ITableModel<T> : IModel<T>
     {
         string connection;
 
-        public CurrencyRepo(string conn) => connection = conn;
+        public ITableModel(string conn) => connection = conn;
 
-        public void Add(Currency currency)
+        public void Add(T currency)
         {
             using (IDbConnection db = new SQLiteConnection(connection))
             {
@@ -33,7 +21,7 @@ namespace SqlLiteData
             }
         }
 
-        public void Add(List<Currency> currencies)
+        public void Add(List<T> currencies)
         {
             using (IDbConnection db = new SQLiteConnection(connection))
             {
@@ -63,23 +51,23 @@ namespace SqlLiteData
             }
         }
 
-        public Currency Get(int id)
+        public T Get(int id)
         {
-            using(IDbConnection db = new SQLiteConnection(connection))
+            using (IDbConnection db = new SQLiteConnection(connection))
             {
-                return db.Query<Currency>("SELECT * FROM Users WHERE Id = @id", new { id }).FirstOrDefault();
+                return db.Query<T>("SELECT * FROM Users WHERE Id = @id", new { id }).FirstOrDefault();
             }
         }
 
-        public List<Currency> GetCurrencies()
+        public List<T> GetData()
         {
-            using(IDbConnection db = new SQLiteConnection(connection))
+            using (IDbConnection db = new SQLiteConnection(connection))
             {
-                return db.Query<Currency>("SELECT * FROM CURRENCIES").ToList();
+                return db.Query<T>("SELECT * FROM CURRENCIES").ToList();
             }
         }
 
-        public void Update(Currency currency)
+        public void Update(T currency)
         {
             using (IDbConnection db = new SQLiteConnection(connection))
             {
@@ -87,5 +75,5 @@ namespace SqlLiteData
                 db.Execute(sqlQuery, currency);
             }
         }
-    }    
+    }
 }
