@@ -17,18 +17,17 @@ namespace HtmlParse
 
         public List<T> GeParseData<T>()
         {
-            switch (typeof(T).Name)
+            return typeof(T).Name switch
             {
-                case "Currency":
-                    return ReturnListValues<T>(".//*/div/select/option");
-                default:
-                    return ReturnListValues<T>(".//*/li/select/option");
-            }
+                "Currency" => ReturnListValues<T>(".//*/div/select/option"),
+                "Bank" => ReturnListValues<T>(".//*/li/select/option"),
+                _ => GetData<T>()
+            };
         }
 
-        public List<Branches> GetData()
+        public List<T> GetData<T>()
         {
-            List<Branches> brancheses = new List<Branches>();
+            List<T> brancheses = new List<T>();
 
             #region Нажимаем на все кнопки чтобы активировать скрипты
 
@@ -46,7 +45,7 @@ namespace HtmlParse
             {
                 ReadOnlyCollection<IWebElement> data = e.FindElements(By.XPath(".//*/tbody/tr/td"));
                 List<List<IWebElement>> elementsList = DropData(data);
-                brancheses.AddRange(BankData(elementsList));
+                brancheses.AddRange(BankData<T>(elementsList));
             }
             return brancheses;
         }
@@ -78,17 +77,17 @@ namespace HtmlParse
                 .ToList();
         }
 
-        private List<Branches> BankData(List<List<IWebElement>> data)
+        private List<T> BankData<T>(List<List<IWebElement>> data)
         {
-            List<Branches> brancheses = new List<Branches>();
+            List<T> brancheses = new List<T>();
             foreach (var _data in data)
             {
-                brancheses.Add(ParseData(_data));
+                brancheses.Add(ParseData<T>(_data));
             }
             return brancheses;
         }
 
-        private Branches ParseData(List<IWebElement> elements)
+        private T ParseData<T>(List<IWebElement> elements)
         {
             string[] nameAndAddr = elements[0].FindElement(By.ClassName("btn-tomap")).GetAttribute("data-name").Split(": ");
 
@@ -98,7 +97,17 @@ namespace HtmlParse
             string bestSale = elements[2].Text;
             string phones = "";
 
-            return new Branches(key, addr, bestBuy, bestSale, phones);
+            return (T)Activator.CreateInstance(typeof(T), new object[]
+            {
+                key,
+                addr,
+                bestBuy,
+                bestSale,
+                phones
+            });
+
+
+
         }
 
     }

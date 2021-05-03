@@ -9,71 +9,112 @@ namespace SqlLiteData
     public class ITableModel<T> : IModel<T>
     {
         string connection;
+        string table;
 
-        public ITableModel(string conn) => connection = conn;
+        public ITableModel(string _connection, string _table)
+        {
+            connection = _connection;
+            table = _table;
+        }
 
-        public void Add(T currency)
+        #region Добавление
+
+        #region По одному объекту
+
+        public void Add(T currency, string request)
         {
             using (IDbConnection db = new SQLiteConnection(connection))
             {
-                string sqlQuery = "INSERT INTO Users (Name, Age) VALUES(@Name, @Age)";
+                //string sqlQuery = $"INSERT INTO {table} (Name, Age) VALUES(@Name, @Age)";
+                string sqlQuery = $"INSERT INTO {table} {request}";
                 db.Execute(sqlQuery, currency);
             }
         }
 
-        public void Add(List<T> currencies)
+        #endregion
+
+        #region Списком объектов
+        public void Add(List<T> currencies, string request)
         {
             using (IDbConnection db = new SQLiteConnection(connection))
             {
-                string sqlQuery = "INSERT INTO Currencies (Key, Url, NameLat, NameRus) VALUES(@Key, @Url, @NameLat, @NameRus)";
+                string sqlQuery = $"INSERT INTO {table} {request}";
                 foreach (var currency in currencies)
                 {
                     db.Execute(sqlQuery, currency);
                 }
             }
         }
+        #endregion
 
-        public void Create()
+        #endregion
+
+        #region Создание таблицы
+
+        public void Create(string request)
         {
             using (IDbConnection db = new SQLiteConnection(connection))
             {
-                string sqlQuery = "CREATE TABLE 'Currencies' ('Key' TEXT NOT NULL CONSTRAINT 'PK_Currencies' PRIMARY KEY,'Url' TEXT NULL,'NameLat' TEXT NULL,'NameRus' TEXT NULL)";
+                //string sqlQuery = $"CREATE TABLE {table} ('Key' TEXT NOT NULL CONSTRAINT 'PK_Currencies' PRIMARY KEY,'Url' TEXT NULL,'NameLat' TEXT NULL,'NameRus' TEXT NULL)";
+                string sqlQuery = $"CREATE TABLE {table} {request}";
                 db.Execute(sqlQuery);
             }
         }
+
+        #endregion
+
+        #region Удаление
 
         public void Delete(int id)
         {
             using (IDbConnection db = new SQLiteConnection(connection))
             {
-                string sqlQuery = "DELETE FROM Users WHERE Id = @id";
+                string sqlQuery = $"DELETE FROM {table} WHERE Id = @id";
                 db.Execute(sqlQuery, new { id });
             }
         }
+
+        #endregion
+
+        #region Получение данных
+
+        #region По одному объекту
 
         public T Get(int id)
         {
             using (IDbConnection db = new SQLiteConnection(connection))
             {
-                return db.Query<T>("SELECT * FROM Users WHERE Id = @id", new { id }).FirstOrDefault();
+                return db.Query<T>($"SELECT * FROM {table} WHERE Id = @id", new { id }).FirstOrDefault();
             }
         }
+
+        #endregion
+
+        #region Списком объектов
 
         public List<T> GetData()
         {
             using (IDbConnection db = new SQLiteConnection(connection))
             {
-                return db.Query<T>("SELECT * FROM CURRENCIES").ToList();
+                return db.Query<T>($"SELECT * FROM {table}").ToList();
             }
         }
 
-        public void Update(T currency)
+        #endregion
+
+        #endregion
+
+        #region Обновление данных
+
+        public void Update(T currency, string request)
         {
             using (IDbConnection db = new SQLiteConnection(connection))
             {
-                string sqlQuery = "UPDATE Users SET Name = @Name, Age = @Age WHERE Id = @Id";
+                string sqlQuery = $"UPDATE {table} {request}";
                 db.Execute(sqlQuery, currency);
             }
         }
+
+        #endregion
     }
 }

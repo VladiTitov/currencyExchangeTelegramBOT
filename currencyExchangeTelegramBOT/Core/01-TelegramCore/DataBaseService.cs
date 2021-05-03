@@ -22,14 +22,17 @@ namespace Core._01_TelegramCore
 
             try
             {
-                currencies = new CurrencyRepo(ConnectionString).GetCurrencies();
+                currencies = new ITableModel<Currency>(ConnectionString, "").GetData();
             }
             catch
             {
                 ParseData<Currency>("/kurs");
             }
 
-            if (currencies.Count() == 0) ParseData<Currency>("/kurs");
+            if (currencies.Count() == 0)
+            {
+                ParseData<Currency>("/kurs");
+            }
 
             foreach (Currency c in currencies)
             {
@@ -42,30 +45,14 @@ namespace Core._01_TelegramCore
 
         }
 
-        public void ParseData<T>(string partUrl)
+        public List<T> ParseData<T>(string partUrl)
         {
-            List<T> data = new List<T>();
-
             using (IWebDriver driver = new ChromeDriver())
             {
-                string Url = @"https://m.select.by" + $"{partUrl}";
-                driver.Url = Url;
-                switch (typeof(T).Name)
-                {
-                    case "City":
-
-                        List<City> citiesValue = new WebSiteData(driver).GetCities();
-                        var cities = new ITableModel<City>("").GetData();
-                        break;
-                    case "Currency":
-                        List<Currency> currencies = new WebSiteData(driver).GetCurrencies();
-                        new CurrencyRepo(ConnectionString).Add(currencies);
-                        break;
-                    case "Branches":
-                        List<Branches> branches = new WebSiteData(driver).GetData();
-                        break;
-                }
+                driver.Url = @"https://m.select.by" + $"{partUrl}";
+                List<T> resultData = new WebSiteData(driver).GeParseData<T>();
                 driver.Close();
+                return resultData;
             }
         }
 
