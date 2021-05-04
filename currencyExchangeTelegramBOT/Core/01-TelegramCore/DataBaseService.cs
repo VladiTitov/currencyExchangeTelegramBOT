@@ -40,23 +40,16 @@ namespace Core._01_TelegramCore
             }
         }
 
-        private void CheckTables()
+        private List<T> ParseData<T>(string partUrl)
         {
-
-        }
-
-        public List<T> ParseData<T>(string partUrl)
-        {
-            using (IWebDriver driver = new ChromeDriver())
+            using IWebDriver driver = new ChromeDriver
             {
-                driver.Url = @"https://m.select.by" + $"{partUrl}";
-                List<T> resultData = new WebSiteData(driver).GeParseData<T>();
-                driver.Close();
-                return resultData;
-            }
+                Url = @"https://m.select.by" + $"{partUrl}"
+            };
+            var resultData = new WebSiteData(driver).GeParseData<T>();
+            driver.Close();
+            return resultData;
         }
-
-        
     }
 
     public class DataTask : Registry

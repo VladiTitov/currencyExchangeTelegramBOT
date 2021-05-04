@@ -11,9 +11,9 @@ namespace HtmlParse
 {
     public class WebSiteData
     {
-        private IWebDriver Driver { get; }
+        private readonly IWebDriver _driver;
 
-        public WebSiteData(IWebDriver driver) => Driver = driver;
+        public WebSiteData(IWebDriver driver) => _driver = driver;
 
         public List<T> GeParseData<T>()
         {
@@ -31,7 +31,7 @@ namespace HtmlParse
 
             #region Нажимаем на все кнопки чтобы активировать скрипты
 
-            ReadOnlyCollection<IWebElement> buttons = Driver.FindElements(By.ClassName("expand"));
+            ReadOnlyCollection<IWebElement> buttons = _driver.FindElements(By.ClassName("expand"));
             foreach (var btn in buttons)
             {
                 Thread.Sleep(200);
@@ -40,7 +40,7 @@ namespace HtmlParse
 
             #endregion
 
-            ReadOnlyCollection<IWebElement> elements = Driver.FindElements(By.ClassName("tablesorter-childRow"));
+            ReadOnlyCollection<IWebElement> elements = _driver.FindElements(By.ClassName("tablesorter-childRow"));
             foreach (IWebElement e in elements)
             {
                 ReadOnlyCollection<IWebElement> data = e.FindElements(By.XPath(".//*/tbody/tr/td"));
@@ -53,7 +53,7 @@ namespace HtmlParse
         private List<T> ReturnListValues<T>(string xPath)
         {
             List<T> result = new List<T>();
-            ReadOnlyCollection<IWebElement> values = Driver.FindElements(By.XPath(xPath));
+            ReadOnlyCollection<IWebElement> values = _driver.FindElements(By.XPath(xPath));
             for (int i = 1; i < values.Count; i++)
             {
                 result.Add((T)Activator.CreateInstance(typeof(T), new object[]
