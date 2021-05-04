@@ -3,15 +3,16 @@ using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 using Dapper;
+using SqlLiteData;
 
-namespace SqlLiteData
+namespace SqlLiteDataAPI
 {
-    public class ITableModel<T> : IModel<T>
+    public class TableModel<T> : IModel<T>
     {
         private readonly string _connection;
         private readonly string _table;
 
-        public ITableModel(string connection, string table)
+        public TableModel(string connection, string table)
         {
             this._connection = connection;
             this._table = table;

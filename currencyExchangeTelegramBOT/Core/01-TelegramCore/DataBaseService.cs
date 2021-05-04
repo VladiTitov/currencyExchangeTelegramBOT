@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Banks._02_Classes;
+using FluentScheduler;
 using HtmlParse;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using SqlLiteData;
-using FluentScheduler;
+using SqlLiteDataAPI;
 
-namespace Core._01_TelegramCore
+namespace Core
 {
     public class DataBaseService
     {
-        private string ConnectionString { get; set; } = "Data Source=../data.db";
+        private string ConnectionString { get; } = "Data Source=../data.db";
 
         public void Start()
         {
@@ -22,7 +20,7 @@ namespace Core._01_TelegramCore
 
             try
             {
-                currencies = new ITableModel<Currency>(ConnectionString, "").GetData();
+                currencies = new TableModel<Currency>(ConnectionString, "").GetData();
             }
             catch
             {
