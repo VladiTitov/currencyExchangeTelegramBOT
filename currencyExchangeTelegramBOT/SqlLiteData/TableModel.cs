@@ -95,11 +95,11 @@ namespace SqlLiteDataAPI
 
         #region Обновление данных
 
-        public void Update(T currency, string request)
+        public void Update(T data, string request)
         {
             using IDbConnection db = new SQLiteConnection(_connection);
             var sqlQuery = $"UPDATE {_table} {request}";
-            db.Execute(sqlQuery, currency);
+            db.Execute(sqlQuery, data);
         }
 
         #endregion

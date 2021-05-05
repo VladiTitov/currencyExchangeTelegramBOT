@@ -1,4 +1,6 @@
 ﻿using System;
+using FluentScheduler;
+using LogicApp;
 
 namespace Core
 {
@@ -7,7 +9,7 @@ namespace Core
         private static void Main(string[] args)
         {
             var connection = new Connection("1401702551:AAHrr7hEYPKXLXdLgvI6zWYsxgzA-Ra24ms");
-            //new DataBaseService().Start();
+            JobManager.Initialize(new ParserDataTask());
             connection.Start();
 
             Console.ReadLine();

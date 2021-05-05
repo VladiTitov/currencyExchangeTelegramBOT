@@ -1,14 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Banks._02_Classes;
 
-namespace SqlLiteData
+namespace SqlLiteDataAPI
 {
-    static class TableCheck
+    public class TableCheck
     {
-        static void Check()
+        public void Check<T>(string connection)
         {
-
+            try
+            {
+               
+            }
+            catch
+            {
+                new TableModel<T>(connection, typeof(T).Name).Create("");
+                this.Check<T>(connection);
+            }
         }
     }
 }
