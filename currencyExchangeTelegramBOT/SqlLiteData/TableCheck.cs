@@ -6,7 +6,7 @@ namespace SqlLiteDataAPI
 {
     public class TableCheck
     {
-        public void Check<T>(string connection)
+        public void Check<T>()
         {
             try
             {
@@ -14,8 +14,8 @@ namespace SqlLiteDataAPI
             }
             catch
             {
-                new TableModel<T>(connection, typeof(T).Name).Create("");
-                this.Check<T>(connection);
+                new TableModel<T>(typeof(T).Name).Create("");
+                this.Check<T>();
             }
         }
     }

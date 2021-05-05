@@ -11,15 +11,13 @@ namespace LogicApp
 {
     public class ParserJob : IJob
     {
-        public void Execute()
-        {
+        public void Execute() =>
             new Parser().Start();
-        }
     }
 
     public class Parser
     {
-        private string ConnectionString { get; } = "Data Source=../data.db";
+        
 
         public void Start()
         {

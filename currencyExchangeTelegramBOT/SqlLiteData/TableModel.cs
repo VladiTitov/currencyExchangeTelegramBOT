@@ -12,9 +12,9 @@ namespace SqlLiteDataAPI
         private readonly string _connection;
         private readonly string _table;
 
-        public TableModel(string connection, string table)
+        public TableModel(string table)
         {
-            this._connection = connection;
+            this._connection = "Data Source=../data.db";
             this._table = table;
         }
 
