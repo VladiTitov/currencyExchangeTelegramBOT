@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Banks._01_Inerfaces;
 
-namespace Banks._02_Classes
+namespace Banks
 {
     public class City : IStructure, IUrl
     {
@@ -15,7 +15,9 @@ namespace Banks._02_Classes
         public City(string key, string nameLat, string nameRus, string url)
         {
             Key = key;
-            NameLat = nameLat;
+            nameLat = url.Split('/')[1];
+            char firstChar = nameLat[0];
+            NameLat = $"{firstChar.ToString().ToUpper()}{nameLat.TrimStart(firstChar)}";
             NameRus = nameRus;
             Url = url;
         }

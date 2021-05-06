@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
+using Banks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Banks._02_Classes;
@@ -12,21 +13,25 @@ namespace HtmlParse
     public class WebSiteData
     {
         private readonly IWebDriver _driver;
-
         public WebSiteData(IWebDriver driver) => _driver = driver;
+
+        private Currency _currency;
+        private City _city;
 
         public List<T> GeParseData<T>()
         {
             return typeof(T).Name switch
             {
                 "Currency" => ReturnListValues<T>(".//*/div/select/option"),
-                "City" => ReturnListValues<T>(".//*/li/select/option"),
-                _ => GetData<T>()
+                "City" => ReturnListValues<T>(".//*/li/select/option")
             };
         }
 
-        public List<T> GetData<T>()
+        public List<T> GetData<T>(City city, Currency currency)
         {
+            _city = city;
+            _currency = currency;
+
             List<T> brancheses = new List<T>();
 
             #region Нажимаем на все кнопки чтобы активировать скрипты
@@ -50,6 +55,8 @@ namespace HtmlParse
             return brancheses;
         }
 
+        #region Возвращает словари (Города и Валюты)
+
         private List<T> ReturnListValues<T>(string xPath)
         {
             List<T> result = new List<T>();
@@ -67,6 +74,8 @@ namespace HtmlParse
 
             return result;
         }
+
+        #endregion
 
         private List<List<IWebElement>> DropData(ReadOnlyCollection<IWebElement> data)
         {
@@ -92,18 +101,36 @@ namespace HtmlParse
             string[] nameAndAddr = elements[0].FindElement(By.ClassName("btn-tomap")).GetAttribute("data-name").Split(": ");
 
             string key = $"{nameAndAddr[0]}-{new Random().Next(1, 8000)}";
+            Branches branches = new Branches()
+            {
+                AdrLat = nameAndAddr[1],
+                AdrRus = nameAndAddr[1],
+                BankName = new Bank()
+                {
+                    Key = key,
+                    NameLat = nameAndAddr[0],
+                    NameRus = nameAndAddr[0]
+                },
+                CityName = new City()
+                {
+                    Key = key,
+                    NameLat = "NameLat",
+                    NameRus = "NameRus",
+                    Url = ""
+                },
+                Key = key,
+                Phones = ""
+            };
             string addr = nameAndAddr[1];
             string bestBuy = elements[1].Text;
             string bestSale = elements[2].Text;
-            string phones = "";
 
             return (T)Activator.CreateInstance(typeof(T), new object[]
             {
                 key,
-                addr,
-                bestBuy,
+                branches,
                 bestSale,
-                phones
+                bestBuy
             });
 
 

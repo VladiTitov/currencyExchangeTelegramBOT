@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Banks;
-using Banks._02_Classes;
 
 namespace SqlLiteData
 {
@@ -19,12 +15,13 @@ namespace SqlLiteData
                         db.Cities.AddRange((IEnumerable<City>) data);
                         break;
                     case "Currency":
-                        db.Currencies.AddRange((IEnumerable<Currency>)data);
+                        db.Currencies.AddRange((IEnumerable<Currency>) data);
                         break;
                     default:
-                        db.Brancheses.AddRange((IEnumerable<Branches>)data);
+                        db.Quotations.AddRange((IEnumerable<Quotation>) data);
                         break;
                 }
+
                 db.SaveChanges();
             }
         }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Banks._01_Inerfaces;
 
-namespace Banks._02_Classes
+namespace Banks
 {
     public class Currency : IStructure, IUrl
     {

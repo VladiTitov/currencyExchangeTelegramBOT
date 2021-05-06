@@ -11,9 +11,8 @@ namespace Banks._02_Classes
 
         public Bank() { }
 
-        public Bank(string key, string nameLat, string nameRus)
+        public Bank(string nameLat, string nameRus)
         {
-            Key = key;
             NameLat = nameLat;
             NameRus = nameRus;
         }

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using Banks;
 using Banks._02_Classes;
 using FluentScheduler;
 using HtmlParse;
@@ -19,7 +21,18 @@ namespace LogicApp
     {
         public void Start()
         {
-            new DataActions().Add(ParseData<City>("/kurs"));
+            var cities = ParseData<City>("/kurs");
+            var currencies = ParseData<Currency>("/kurs");
+
+            foreach (var city in cities)
+            {
+                foreach (var currency in currencies)
+                {
+                    string url = $"/{city.NameLat}{currency.Url}";
+                    var data = ParseData<Quotation>(url);
+                    new DataActions().Add(data);
+                }
+            }
         }
 
         private List<T> ParseData<T>(string partUrl)

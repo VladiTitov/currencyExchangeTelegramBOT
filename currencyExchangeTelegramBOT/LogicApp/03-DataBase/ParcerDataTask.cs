@@ -8,8 +8,8 @@ namespace LogicApp
         public ParserDataTask() =>
             this.Schedule(() =>
                     new ParserJob())
-                .ToRunOnceAt(DateTime.Now.AddSeconds(30))
-                .AndEvery(1)
+                .ToRunOnceAt(DateTime.Now.AddSeconds(5))
+                .AndEvery(10)
                 .Minutes();
     }
 }
