@@ -11,29 +11,27 @@ namespace HtmlParse
 {
     public class WebSiteData
     {
-        private IWebDriver Driver { get; }
+        private readonly IWebDriver _driver;
 
-        public WebSiteData(IWebDriver driver) => Driver = driver;
+        public WebSiteData(IWebDriver driver) => _driver = driver;
 
-        public List<Currency> GetCurrencies()
+        public List<T> GeParseData<T>()
         {
-            List<Currency> currencies = ReturnListValues<Currency>(".//*/div/select/option");
-            return currencies;
+            return typeof(T).Name switch
+            {
+                "Currency" => ReturnListValues<T>(".//*/div/select/option"),
+                "Bank" => ReturnListValues<T>(".//*/li/select/option"),
+                _ => GetData<T>()
+            };
         }
 
-        public List<City> GetCities()
+        public List<T> GetData<T>()
         {
-            List<City> cities = ReturnListValues<City>(".//*/li/select/option");
-            return cities;
-        }
-
-        public List<Branches> GetData()
-        {
-            List<Branches> brancheses = new List<Branches>();
+            List<T> brancheses = new List<T>();
 
             #region Нажимаем на все кнопки чтобы активировать скрипты
 
-            ReadOnlyCollection<IWebElement> buttons = Driver.FindElements(By.ClassName("expand"));
+            ReadOnlyCollection<IWebElement> buttons = _driver.FindElements(By.ClassName("expand"));
             foreach (var btn in buttons)
             {
                 Thread.Sleep(200);
@@ -42,12 +40,12 @@ namespace HtmlParse
 
             #endregion
 
-            ReadOnlyCollection<IWebElement> elements = Driver.FindElements(By.ClassName("tablesorter-childRow"));
+            ReadOnlyCollection<IWebElement> elements = _driver.FindElements(By.ClassName("tablesorter-childRow"));
             foreach (IWebElement e in elements)
             {
                 ReadOnlyCollection<IWebElement> data = e.FindElements(By.XPath(".//*/tbody/tr/td"));
                 List<List<IWebElement>> elementsList = DropData(data);
-                brancheses.AddRange(BankData(elementsList));
+                brancheses.AddRange(BankData<T>(elementsList));
             }
             return brancheses;
         }
@@ -55,14 +53,14 @@ namespace HtmlParse
         private List<T> ReturnListValues<T>(string xPath)
         {
             List<T> result = new List<T>();
-            ReadOnlyCollection<IWebElement> values = Driver.FindElements(By.XPath(xPath));
+            ReadOnlyCollection<IWebElement> values = _driver.FindElements(By.XPath(xPath));
             for (int i = 1; i < values.Count; i++)
             {
                 result.Add((T)Activator.CreateInstance(typeof(T), new object[]
                 {
-                    $"{typeof(T).Name}{i}", 
-                    "lat", 
-                    values[i].Text, 
+                    $"{typeof(T).Name}{i}",
+                    "lat",
+                    values[i].Text,
                     values[i].GetAttribute("value")
                 }));
             }
@@ -79,17 +77,17 @@ namespace HtmlParse
                 .ToList();
         }
 
-        private List<Branches> BankData(List<List<IWebElement>> data)
+        private List<T> BankData<T>(List<List<IWebElement>> data)
         {
-            List<Branches> brancheses = new List<Branches>();
+            List<T> result = new List<T>();
             foreach (var _data in data)
             {
-                brancheses.Add(ParseData(_data));
+                result.Add(ParseData<T>(_data));
             }
-            return brancheses;
+            return result;
         }
 
-        private Branches ParseData(List<IWebElement> elements)
+        private T ParseData<T>(List<IWebElement> elements)
         {
             string[] nameAndAddr = elements[0].FindElement(By.ClassName("btn-tomap")).GetAttribute("data-name").Split(": ");
 
@@ -99,10 +97,20 @@ namespace HtmlParse
             string bestSale = elements[2].Text;
             string phones = "";
 
-            return new Branches(key, addr, bestBuy, bestSale, phones);
+            return (T)Activator.CreateInstance(typeof(T), new object[]
+            {
+                key,
+                addr,
+                bestBuy,
+                bestSale,
+                phones
+            });
+
+
+
         }
 
     }
 
-    
+
 }
