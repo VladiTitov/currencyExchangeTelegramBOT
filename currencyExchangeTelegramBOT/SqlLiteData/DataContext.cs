@@ -1,4 +1,5 @@
-﻿using Banks._02_Classes;
+﻿using Banks;
+using Banks._02_Classes;
 using Microsoft.EntityFrameworkCore;
 
 namespace SqlLiteData
