@@ -20,7 +20,7 @@ namespace HtmlParse
             return typeof(T).Name switch
             {
                 "Currency" => ReturnListValues<T>(".//*/div/select/option"),
-                "Bank" => ReturnListValues<T>(".//*/li/select/option"),
+                "City" => ReturnListValues<T>(".//*/li/select/option"),
                 _ => GetData<T>()
             };
         }

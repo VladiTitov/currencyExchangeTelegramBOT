@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HtmlParse\HtmlParse.csproj" />
+    <ProjectReference Include="..\SqlLiteData\SqlLiteData.csproj" />
   </ItemGroup>
 
 </Project>

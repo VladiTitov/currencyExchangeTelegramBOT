@@ -15,6 +15,6 @@ namespace SqlLiteData
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => 
-            optionsBuilder.UseSqlite(@"Data Source=..\banks.db");
+            optionsBuilder.UseSqlite(@"Data Source=..\converterBD.db");
     }
 }

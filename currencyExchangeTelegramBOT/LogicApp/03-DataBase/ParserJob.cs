@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Data;
+using Banks._02_Classes;
 using FluentScheduler;
 using HtmlParse;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using SqlLiteData;
 
 namespace LogicApp
 {
@@ -14,18 +17,9 @@ namespace LogicApp
 
     public class Parser
     {
-
-
         public void Start()
         {
-            //Task
-
-            //Обновить словари (города, валюты)
-
-
-
-            //Отпарсить все валюты
-
+            new DataActions().Add(ParseData<City>("/kurs"));
         }
 
         private List<T> ParseData<T>(string partUrl)

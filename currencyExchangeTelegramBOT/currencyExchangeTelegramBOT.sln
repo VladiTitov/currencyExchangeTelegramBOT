@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BanksTestConsole", "BanksTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HtmlParse", "HtmlParse\HtmlParse.csproj", "{8ED75786-79F3-4194-B9DE-97A154631E4D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlLiteDataAPI", "SqlLiteData\SqlLiteDataAPI.csproj", "{FBAC1387-0035-42EC-97EB-25729C12484B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlLiteData", "SqlLiteData\SqlLiteData.csproj", "{FBAC1387-0035-42EC-97EB-25729C12484B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
