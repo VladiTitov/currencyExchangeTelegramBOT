@@ -18,6 +18,7 @@ namespace HtmlParse
             {
                 "Currency" => ReturnListValues<T>(".//*/div/select/option"),
                 "City" => ReturnListValues<T>(".//*/li/select/option"),
+                _ => new WebSiteData(_driver).GetData<T>()
             };
         }
 

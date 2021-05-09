@@ -11,7 +11,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HtmlParse\HtmlParse.csproj" />
-    <ProjectReference Include="..\SqlLiteData\SqlLiteData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="03-DataBase\02-Mapping\" />
   </ItemGroup>
 
 </Project>

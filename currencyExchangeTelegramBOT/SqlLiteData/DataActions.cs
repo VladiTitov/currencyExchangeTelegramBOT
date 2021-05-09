@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Banks;
 
 namespace SqlLiteData
@@ -9,20 +10,17 @@ namespace SqlLiteData
         {
             using (var db = new DataContext())
             {
-                switch (typeof(T).Name)
+                //db.Quotations.AddRange((IEnumerable<Quotation>) data);
+                foreach (var d in (IEnumerable<Quotation>)data)
                 {
-                    case "City":
-                        db.Cities.AddRange((IEnumerable<City>) data);
-                        break;
-                    case "Currency":
-                        db.Currencies.AddRange((IEnumerable<Currency>) data);
-                        break;
-                    default:
-                        db.Quotations.AddRange((IEnumerable<Quotation>) data);
-                        break;
-                }
+                    if (db.Branches.Any(a => a.Key == d.Branch.Key))
+                    { 
 
-                db.SaveChanges();
+                    }
+                    db.Quotations.Add(d);
+                    db.SaveChanges();
+                }
+                //db.SaveChanges();
             }
         }
     }
