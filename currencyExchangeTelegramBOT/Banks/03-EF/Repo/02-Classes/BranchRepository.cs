@@ -1,0 +1,47 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using Banks;
+using SqlLiteData;
+
+namespace DataAccess.Repo
+{
+    class BranchRepository : IBranchRepository
+    {
+        public void Add(Branches branch)
+        {
+            using (DataContext db = new DataContext())
+            {
+                db.Branches.Add(branch);
+                db.SaveChanges();
+            }
+        }
+
+        public void Delete(string id)
+        {
+            using (DataContext db = new DataContext())
+            {
+                var tempBranch = db.Branches.Find(id);
+                db.Branches.Remove(tempBranch);
+                db.SaveChanges();
+            }
+        }
+
+        public IEnumerable<Branches> GetId(string id)
+        {
+            using (DataContext db = new DataContext())
+                return db.Branches.Where(a => a.Key == id).ToList();
+        }
+
+        public void Update(Branches branch)
+        {
+            using (DataContext db = new DataContext())
+            {
+                var tempBranch = db.Branches.Find(branch.Key);
+                tempBranch.AdrLat = branch.AdrLat;
+                tempBranch.AdrRus = branch.AdrRus;
+                tempBranch.Phones = branch.Phones;
+                db.SaveChanges();
+            }
+        }
+    }
+}

@@ -1,17 +1,18 @@
-﻿using Banks;
+﻿using System;
+using Banks;
 using System.Collections.Generic;
 using System.Linq;
 using SqlLiteData;
 
 namespace DataAccess.Repo
 {
-    class BankRepository : IBankRepository
+    class CityRepository : ICityRepository
     {
-        public void Add(Bank bank)
+        public void Add(City city)
         {
             using (DataContext db = new DataContext())
             {
-                db.Banks.Add(bank);
+                db.Cities.Add(city);
                 db.SaveChanges();
             }
         }
@@ -20,26 +21,26 @@ namespace DataAccess.Repo
         {
             using (DataContext db = new DataContext())
             {
-                var tempBank = db.Banks.Find(id);
-                db.Banks.Remove(tempBank);
+                var tempCity = db.Cities.Find(id);
+                db.Cities.Remove(tempCity);
                 db.SaveChanges();
             }
         }
 
-        public IEnumerable<Bank> GetId(string bankId)
+        public IEnumerable<City> GetId(string id)
         {
             using (DataContext db = new DataContext())
-                return db.Banks.Where(a => a.Key == bankId).ToList();
-
+                return db.Cities.Where(a => a.Key == id).ToList();
         }
 
-        public void Update(Bank bank)
+        public void Update(City city)
         {
             using (DataContext db = new DataContext())
             {
-                var tempBank = db.Banks.Find(bank.Key);
-                tempBank.NameLat = bank.NameLat;
-                tempBank.NameRus = bank.NameRus;
+                var tempCity = db.Cities.Find(city.Key);
+                tempCity.NameLat = city.NameLat;
+                tempCity.NameRus = city.NameRus;
+                tempCity.Url = city.Url;
                 db.SaveChanges();
             }
         }

@@ -6,10 +6,10 @@ namespace DataAccess.Repo
 {
     interface IBankRepository
     {
-        IEnumerable<Bank> GetByBankId(string bankId);
-        string Create(Bank bank);
-        void DeleteBank(string id);
-        void UpdateBank(Bank bank);
+        IEnumerable<Bank> GetId(string id);
+        void Add(Bank bank);
+        void Delete(string id);
+        void Update(Bank bank);
 
     }
 }
