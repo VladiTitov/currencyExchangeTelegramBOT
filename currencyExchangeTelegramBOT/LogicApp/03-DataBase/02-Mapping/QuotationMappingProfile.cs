@@ -5,9 +5,7 @@ namespace BusinessLogic
 {
     class QuotationMappingProfile : Profile
     {
-        public QuotationMappingProfile()
-        {
+        public QuotationMappingProfile() =>
             CreateMap<Quotation, QuotationDTO>().ReverseMap();
-        }
     }
 }

@@ -5,9 +5,7 @@ namespace BusinessLogic
 {
     class CityMappingProfile : Profile
     {
-        public CityMappingProfile()
-        {
+        public CityMappingProfile() =>
             CreateMap<City, CityDTO>().ReverseMap();
-        }
     }
 }

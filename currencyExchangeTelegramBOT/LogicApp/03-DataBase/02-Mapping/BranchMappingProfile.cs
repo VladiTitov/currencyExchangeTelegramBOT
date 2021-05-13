@@ -5,9 +5,7 @@ namespace BusinessLogic
 {
     class BranchMappingProfile : Profile
     {
-        public BranchMappingProfile()
-        {
+        public BranchMappingProfile() =>
             CreateMap<Branches, BranchDTO>().ReverseMap();
-        }
     }
 }

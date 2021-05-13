@@ -5,9 +5,7 @@ namespace BusinessLogic
 {
     class CurrencyMappingProfile : Profile
     {
-        public CurrencyMappingProfile()
-        {
+        public CurrencyMappingProfile() =>
             CreateMap<Currency, CurrencyDTO>().ReverseMap();
-        }
     }
 }
