@@ -6,7 +6,7 @@ using SqlLiteData;
 
 namespace DataAccess.Repo
 {
-    class CurrencyRepository : ICurrencyRepository
+    public class CurrencyRepository : ICurrencyRepository
     {
         public IEnumerable<Currency> Get(string id)
         {

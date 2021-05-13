@@ -5,7 +5,7 @@ using SqlLiteData;
 
 namespace DataAccess.Repo
 {
-    class QuotationRepository : IQuotationRepository
+    public class QuotationRepository : IQuotationRepository
     {
         public IEnumerable<Quotation> Get(string id)
         {

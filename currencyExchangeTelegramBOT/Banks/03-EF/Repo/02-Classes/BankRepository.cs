@@ -5,7 +5,7 @@ using SqlLiteData;
 
 namespace DataAccess.Repo
 {
-    class BankRepository : IBankRepository
+    public class BankRepository : IBankRepository
     {
         public void Add(Bank bank)
         {

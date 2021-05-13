@@ -5,7 +5,7 @@ using SqlLiteData;
 
 namespace DataAccess.Repo
 {
-    class BranchRepository : IBranchRepository
+    public class BranchRepository : IBranchRepository
     {
         public void Add(Branches branch)
         {
