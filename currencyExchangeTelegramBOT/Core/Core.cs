@@ -1,6 +1,6 @@
 ﻿using System;
+using BusinessLogic;
 using FluentScheduler;
-using LogicApp;
 
 namespace Core
 {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Banks;
+using DataAccess;
 
-namespace LogicApp
+namespace BusinessLogic
 {
     class CurrencyMappingProfile : Profile
     {

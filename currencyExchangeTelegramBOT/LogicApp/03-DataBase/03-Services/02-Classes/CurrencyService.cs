@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using Banks;
+using DataAccess;
 using DataAccess.Repo;
 
-namespace LogicApp
+namespace BusinessLogic
 {
     class CurrencyService : ICurrencyService
     {

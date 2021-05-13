@@ -1,7 +1,6 @@
-﻿using Banks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace SqlLiteData
+namespace DataAccess
 {
     public class DataContext : DbContext
     {

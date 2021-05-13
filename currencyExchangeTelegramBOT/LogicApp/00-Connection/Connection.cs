@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using LogicApp._01_Buttons;
-using LogicApp._02_MenuBot;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace LogicApp
+namespace BusinessLogic
 {
     public class Connection
     {

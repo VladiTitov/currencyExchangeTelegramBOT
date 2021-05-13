@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LogicApp._01_Buttons
+namespace BusinessLogic
 {
     public class Button
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentScheduler;
 
-namespace LogicApp
+namespace BusinessLogic
 {
     public class ParserDataTask : Registry
     {

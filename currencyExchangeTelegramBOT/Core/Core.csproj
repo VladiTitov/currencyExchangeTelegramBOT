@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LogicApp\LogicApp.csproj" />
+    <ProjectReference Include="..\LogicApp\BusinessLogic.csproj" />
   </ItemGroup>
 
 </Project>

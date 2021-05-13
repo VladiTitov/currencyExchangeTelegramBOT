@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-BusinesLogic", "03-Busin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "Banks\DataAccess.csproj", "{104076E2-6207-46AE-98C6-F1A07B449B73}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicApp", "LogicApp\LogicApp.csproj", "{D5AE1545-F6F1-4024-B004-38C2D068469A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "LogicApp\BusinessLogic.csproj", "{D5AE1545-F6F1-4024-B004-38C2D068469A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00-Tests", "00-Tests", "{E01A7DD0-C677-47FE-B085-B45609CA6F8F}"
 EndProject

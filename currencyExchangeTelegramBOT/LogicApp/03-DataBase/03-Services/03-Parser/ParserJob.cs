@@ -1,18 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using AutoMapper;
-using Banks;
 using DataAccess.Repo;
 using FluentScheduler;
 using HtmlParse;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using SimpleInjector;
-using SqlLiteData;
 
-namespace LogicApp
+namespace BusinessLogic
 {
     public class ParserJob : IJob
     {
@@ -39,6 +32,9 @@ namespace LogicApp
 
             container.Register<IQuotationService, QuotationService>(Lifestyle.Singleton);
             container.Register<IQuotationRepository, QuotationRepository>(Lifestyle.Singleton);
+
+            container.Register<ICitiesParserRepository, CitiesParserRepository>(Lifestyle.Singleton);
+            container.Register<ICityWebDataService, CityWebDataService>(Lifestyle.Singleton);
 
             container.Register<IMapper>(() => CreateMapper(), Lifestyle.Singleton);
             container.Register<Parser>(Lifestyle.Singleton);

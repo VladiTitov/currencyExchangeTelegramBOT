@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AutoMapper;
-using Banks;
+using DataAccess;
 using DataAccess.Repo;
 
-namespace LogicApp
+namespace BusinessLogic
 {
     public class CityService : ICityService
     {

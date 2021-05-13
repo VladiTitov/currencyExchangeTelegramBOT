@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Banks._01_Inerfaces;
 
-namespace Banks
+namespace DataAccess
 {
     public class City : IStructure, IUrl
     {

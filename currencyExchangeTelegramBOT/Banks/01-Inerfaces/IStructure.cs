@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Banks._01_Inerfaces
+namespace DataAccess
 {
     interface IStructure
     {

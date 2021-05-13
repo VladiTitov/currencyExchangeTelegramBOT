@@ -1,4 +1,4 @@
-﻿namespace LogicApp
+﻿namespace BusinessLogic
 {
     public class BranchDTO
     {

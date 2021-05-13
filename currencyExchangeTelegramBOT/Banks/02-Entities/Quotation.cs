@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Banks
+namespace DataAccess
 {
     public class Quotation : IQuotes
     {

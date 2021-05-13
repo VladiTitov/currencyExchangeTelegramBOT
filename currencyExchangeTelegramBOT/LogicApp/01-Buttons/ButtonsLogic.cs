@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace LogicApp
+namespace BusinessLogic
 {
     public class ButtonsLogic
     {

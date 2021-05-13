@@ -1,4 +1,4 @@
-﻿namespace Banks._01_Inerfaces
+﻿namespace DataAccess
 {
     interface IUrl
     {

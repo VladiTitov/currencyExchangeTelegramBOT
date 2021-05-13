@@ -1,7 +1,6 @@
-﻿using LogicApp._01_Buttons;
-using Telegram.Bot.Types.ReplyMarkups;
+﻿using Telegram.Bot.Types.ReplyMarkups;
 
-namespace LogicApp._02_MenuBot
+namespace BusinessLogic
 {
     public static class ArchitectureMenu
     {

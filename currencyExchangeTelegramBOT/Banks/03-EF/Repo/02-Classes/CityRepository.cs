@@ -1,8 +1,6 @@
 ﻿using System;
-using Banks;
 using System.Collections.Generic;
 using System.Linq;
-using SqlLiteData;
 
 namespace DataAccess.Repo
 {

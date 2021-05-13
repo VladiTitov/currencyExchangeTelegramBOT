@@ -1,4 +1,4 @@
-﻿namespace Banks
+﻿namespace DataAccess
 {
     public class SiteData
     {
