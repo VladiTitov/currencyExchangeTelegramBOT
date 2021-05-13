@@ -33,8 +33,8 @@ namespace BusinessLogic
             container.Register<IQuotationService, QuotationService>(Lifestyle.Singleton);
             container.Register<IQuotationRepository, QuotationRepository>(Lifestyle.Singleton);
 
-            container.Register<ICitiesParserRepository, CitiesParserRepository>(Lifestyle.Singleton);
             container.Register<ICityWebDataService, CityWebDataService>(Lifestyle.Singleton);
+            container.Register<ICitiesParserRepository, CitiesParserRepository>(Lifestyle.Singleton);
 
             container.Register<IMapper>(() => CreateMapper(), Lifestyle.Singleton);
             container.Register<Parser>(Lifestyle.Singleton);

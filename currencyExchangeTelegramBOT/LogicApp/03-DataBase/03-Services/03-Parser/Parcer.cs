@@ -10,7 +10,7 @@ namespace BusinessLogic
     {
         private readonly ICityService _cityService;
         private readonly ICityWebDataService _cityWebDataService;
-
+        
         private readonly IBranchService _branchService;
         private readonly IBankService _bankService;
         private readonly ICurrencyService _currencyService;
@@ -29,28 +29,13 @@ namespace BusinessLogic
 
         public void Start()
         {
-            var data =  _cityWebDataService.GetData(".//*/li/select/option");
-
-
-
-
-            if (!_cityService.GetData().Any())
+            var cities =  _cityWebDataService.GetData(".//*/li/select/option");
+            foreach (var city in cities)
             {
-                //наполняем данными
+                if (_cityService.GetData().Any(a=>a.Key == city.Key)) _cityService.Update(city);
+                else _cityService.Add(city);
             }
-            
 
-
-
-
-
-
-            //_cityService.Add(pr);
-
-
-
-            //_cities = ParseData<City>("/kurs");
-            //_currencies = ParseData<Currency>("/kurs");
 
             //foreach (var city in _cities)
             //{
@@ -62,14 +47,6 @@ namespace BusinessLogic
             //        ReturnCurrencies(currency, data);
             //    }
             //}
-        }
-
-        private List<T> ParseData<T>(string partUrl)
-        {
-            using IWebDriver driver = new ChromeDriver { Url = @"https://m.select.by" + $"{partUrl}" };
-            var resultData = new ParseDictionaries(driver).GeParseData<T>();
-            driver.Close();
-            return resultData;
         }
 
         //private void ReturnBanks(List<SiteData> data, City city)

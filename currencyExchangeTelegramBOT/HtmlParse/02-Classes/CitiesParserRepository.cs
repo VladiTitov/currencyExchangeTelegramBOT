@@ -8,35 +8,30 @@ namespace HtmlParse
 {
     public class CitiesParserRepository : ICitiesParserRepository
     {
-        private readonly string _url;
-
-        public CitiesParserRepository(string url) =>
-            _url = url;
-
-        public IEnumerable<City> GetData(string key)
+        public IEnumerable<City> GetData(string key, string url)
         {
             var data = new List<City>();
 
-            //using (IWebDriver driver = new ChromeDriver() {Url = _url})
-            //{
-            //    ReadOnlyCollection<IWebElement> values = driver.FindElements(By.XPath(key));
-            //    for (int i = 1; i < values.Count; i++)
-            //    {
-            //        string url = values[i].GetAttribute("value");
-            //        string nameLat = GetNameLatCity(url);
-            //        string nameRus = values[i].Text;
+            using (IWebDriver driver = new ChromeDriver() { Url = url })
+            {
+                ReadOnlyCollection<IWebElement> values = driver.FindElements(By.XPath(key));
+                for (int i = 1; i < values.Count; i++)
+                {
+                    string _url = values[i].GetAttribute("value");
+                    string _nameLat = GetNameLatCity(_url);
+                    string _nameRus = values[i].Text;
 
 
-            //        data.Add(new City()
-            //        {
-            //            Key = i.ToString(),
-            //            NameLat = nameLat,
-            //            NameRus = nameRus,
-            //            Url = url
-            //        });
-            //    }
-            //    driver.Close();
-            //}
+                    data.Add(new City()
+                    {
+                        Key = i.ToString(),
+                        NameLat = _nameLat,
+                        NameRus = _nameRus,
+                        Url = _url
+                    });
+                }
+                //driver.Close();
+            }
             return data;
         }
 

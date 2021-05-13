@@ -5,6 +5,6 @@ namespace HtmlParse
 {
     public interface ICitiesParserRepository
     { 
-        IEnumerable<City> GetData(string key);
+        IEnumerable<City> GetData(string key, string url);
     }
 }
