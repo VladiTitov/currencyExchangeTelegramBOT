@@ -3,7 +3,7 @@ using DataAccess;
 
 namespace BusinessLogic
 {
-    class BankMappingProfile : Profile
+    internal class BankMappingProfile : Profile
     {
         public BankMappingProfile() =>
             CreateMap<Bank, BankDTO>().ReverseMap();

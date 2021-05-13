@@ -3,7 +3,7 @@ using DataAccess;
 
 namespace BusinessLogic
 {
-    class CityMappingProfile : Profile
+    internal class CityMappingProfile : Profile
     {
         public CityMappingProfile() =>
             CreateMap<City, CityDTO>().ReverseMap();

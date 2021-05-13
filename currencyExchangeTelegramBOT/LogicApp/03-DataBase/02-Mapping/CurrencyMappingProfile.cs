@@ -3,7 +3,7 @@ using DataAccess;
 
 namespace BusinessLogic
 {
-    class CurrencyMappingProfile : Profile
+    internal class CurrencyMappingProfile : Profile
     {
         public CurrencyMappingProfile() =>
             CreateMap<Currency, CurrencyDTO>().ReverseMap();

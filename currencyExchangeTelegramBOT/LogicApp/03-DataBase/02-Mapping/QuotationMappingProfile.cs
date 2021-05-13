@@ -3,7 +3,7 @@ using DataAccess;
 
 namespace BusinessLogic
 {
-    class QuotationMappingProfile : Profile
+    internal class QuotationMappingProfile : Profile
     {
         public QuotationMappingProfile() =>
             CreateMap<Quotation, QuotationDTO>().ReverseMap();
