@@ -8,10 +8,16 @@ namespace DataAccess.Repo
 {
     class CurrencyRepository : ICurrencyRepository
     {
-        public IEnumerable<Currency> GetId(string id)
+        public IEnumerable<Currency> Get(string id)
         {
             using (DataContext db = new DataContext())
                 return db.Currencies.Where(a => a.Key == id).ToList();
+        }
+
+        public IEnumerable<Currency> GetAll()
+        {
+            using (DataContext db = new DataContext())
+                return db.Currencies.ToList();
         }
 
         public void Add(Currency currency)

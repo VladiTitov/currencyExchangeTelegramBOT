@@ -4,9 +4,10 @@ using Banks;
 
 namespace DataAccess.Repo
 {
-    interface IBankRepository
+    public interface IBankRepository
     {
-        IEnumerable<Bank> GetId(string id);
+        IEnumerable<Bank> Get(string id);
+        IEnumerable<Bank> GetAll();
         void Add(Bank bank);
         void Delete(string id);
         void Update(Bank bank);

@@ -1,6 +1,6 @@
 ﻿namespace LogicApp
 {
-    class BranchDTO
+    public class BranchDTO
     {
         public string Key { get; set; }
         public string AdrLat { get; set; }

@@ -26,10 +26,16 @@ namespace DataAccess.Repo
             }
         }
 
-        public IEnumerable<Branches> GetId(string id)
+        public IEnumerable<Branches> Get(string id)
         {
             using (DataContext db = new DataContext())
                 return db.Branches.Where(a => a.Key == id).ToList();
+        }
+
+        public IEnumerable<Branches> GetAll()
+        {
+            using (DataContext db = new DataContext())
+                return db.Branches.ToList();
         }
 
         public void Update(Branches branch)

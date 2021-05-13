@@ -7,10 +7,16 @@ namespace DataAccess.Repo
 {
     class QuotationRepository : IQuotationRepository
     {
-        public IEnumerable<Quotation> GetId(string id)
+        public IEnumerable<Quotation> Get(string id)
         {
             using (DataContext db = new DataContext())
-                return db.Quotations.Where(a => a.Key == id);
+                return db.Quotations.Where(a => a.Key == id).ToList();
+        }
+
+        public IEnumerable<Quotation> GetAll()
+        {
+            using (DataContext db = new DataContext())
+                return db.Quotations.ToList();
         }
 
         public void Add(Quotation quotation)

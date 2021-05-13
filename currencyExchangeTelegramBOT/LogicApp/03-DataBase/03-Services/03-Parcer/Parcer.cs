@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using Banks;
-using FluentScheduler;
 using HtmlParse;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using SqlLiteData;
 
 namespace LogicApp
 {
-    public class ParserJob : IJob
-    {
-        public void Execute() =>
-            new Parser().Start();
-    }
-
     public class Parser
     {
+        private readonly ICityService _cityService;
+
+
+        public Parser(ICityService cityService)
+        {
+            _cityService = cityService;
+        }
+
+
         private List<City> _cities;
         private List<Currency> _currencies;
         private List<Bank> _banks { get; set; } = new List<Bank>();
@@ -26,6 +26,10 @@ namespace LogicApp
 
         public void Start()
         {
+            _cityService.Add(pr);
+
+
+
             _cities = ParseData<City>("/kurs");
             _currencies = ParseData<Currency>("/kurs");
 
@@ -53,14 +57,14 @@ namespace LogicApp
         {
             foreach (var d in data)
             {
-                if (_banks.All(a => a.NameRus != d.Bank)) 
+                if (_banks.All(a => a.NameRus != d.Bank))
                     _banks.Add(new Bank()
                     {
                         Key = $"Bank_{_banks.Count()}",
                         NameLat = d.Bank,
                         NameRus = d.Bank
                     });
-                if (_branches.All(a=> a.AdrRus != d.Adr))
+                if (_branches.All(a => a.AdrRus != d.Adr))
                     _branches.Add(new Branches()
                     {
                         Key = $"Branch_{_branches.Count}",

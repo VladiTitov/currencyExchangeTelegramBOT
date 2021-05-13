@@ -26,11 +26,16 @@ namespace DataAccess.Repo
             }
         }
 
-        public IEnumerable<Bank> GetId(string bankId)
+        public IEnumerable<Bank> Get(string bankId)
         {
             using (DataContext db = new DataContext())
                 return db.Banks.Where(a => a.Key == bankId).ToList();
+        }
 
+        public IEnumerable<Bank> GetAll()
+        {
+            using (DataContext db = new DataContext())
+                return db.Banks.ToList();
         }
 
         public void Update(Bank bank)

@@ -6,7 +6,7 @@ using SqlLiteData;
 
 namespace DataAccess.Repo
 {
-    class CityRepository : ICityRepository
+    public class CityRepository : ICityRepository
     {
         public void Add(City city)
         {
@@ -27,10 +27,16 @@ namespace DataAccess.Repo
             }
         }
 
-        public IEnumerable<City> GetId(string id)
+        public IEnumerable<City> Get(string id)
         {
             using (DataContext db = new DataContext())
                 return db.Cities.Where(a => a.Key == id).ToList();
+        }
+
+        public IEnumerable<City> GetAll()
+        {
+            using (DataContext db = new DataContext())
+                return db.Cities.ToList();
         }
 
         public void Update(City city)

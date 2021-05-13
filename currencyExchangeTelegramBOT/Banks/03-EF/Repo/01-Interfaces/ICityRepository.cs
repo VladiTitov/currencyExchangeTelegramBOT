@@ -3,9 +3,10 @@ using Banks;
 
 namespace DataAccess.Repo
 {
-    interface ICityRepository
+    public interface ICityRepository
     {
-        IEnumerable<City> GetId(string id);
+        IEnumerable<City> Get(string id);
+        IEnumerable<City> GetAll();
         void Add(City city);
         void Delete(string id);
         void Update(City city);

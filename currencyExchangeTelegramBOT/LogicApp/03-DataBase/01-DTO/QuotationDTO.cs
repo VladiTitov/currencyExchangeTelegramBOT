@@ -1,6 +1,6 @@
 ﻿namespace LogicApp
 {
-    class QuotationDTO
+    public class QuotationDTO
     {
         public string Key { get; set; }
         public string Sale { get; set; }

@@ -3,9 +3,10 @@ using Banks;
 
 namespace DataAccess.Repo
 {
-    interface IQuotationRepository
+    public interface IQuotationRepository
     {
-        IEnumerable<Quotation> GetId(string id);
+        IEnumerable<Quotation> Get(string id);
+        IEnumerable<Quotation> GetAll();
         void Add(Quotation quotation);
         void Delete(string id);
         void Update(Quotation quotation);

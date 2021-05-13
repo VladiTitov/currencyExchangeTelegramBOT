@@ -1,6 +1,6 @@
 ﻿namespace LogicApp
 {
-    class CurrencyDTO
+    public class CurrencyDTO
     {
         public string Key { get; set; }
         public string NameLat { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace LogicApp
 {
-    class CityDTO
+    public class CityDTO
     {
         public string Key { get; set; }
         public string NameLat { get; set; }

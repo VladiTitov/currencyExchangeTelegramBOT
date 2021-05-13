@@ -18,6 +18,6 @@ namespace SqlLiteData
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             //optionsBuilder.UseSqlite(@"Data Source=..\\banks.db");
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=helloappdb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=bankDB;Trusted_Connection=True;");
     }
 }
