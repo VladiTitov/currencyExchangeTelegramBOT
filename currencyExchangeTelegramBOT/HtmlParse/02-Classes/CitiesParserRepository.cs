@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using DataAccess;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -8,29 +7,35 @@ namespace HtmlParse
 {
     public class CitiesParserRepository : ICitiesParserRepository
     {
-        public IEnumerable<City> GetData(string key, string resource)
+        public IEnumerable<City> GetData(string selector, string resource)
         {
-            var data = new List<City>();
-
             using (IWebDriver driver = new ChromeDriver() { Url = resource })
             {
-                ReadOnlyCollection<IWebElement> values = driver.FindElements(By.XPath(key));
-                for (int i = 1; i < values.Count; i++)
-                {
-                    var url = values[i].GetAttribute("value");
-                    var nameLat = GetNameLatCity(url);
-                    var nameRus = values[i].Text;
-
-                    data.Add(new City()
-                    {
-                        Key = i.ToString(),
-                        NameLat = nameLat,
-                        NameRus = nameRus,
-                        Url = url
-                    });
-                }
+                var values = driver.FindElements(By.XPath(selector));
+                var resultCities = GetCities(values);
+                return resultCities;
             }
-            return data;
+        }
+
+        private IEnumerable<City> GetCities(IReadOnlyList<IWebElement> dataWebElements)
+        {
+            var resultCities = new List<City>();
+
+            for (int i = 1; i < dataWebElements.Count; i++)
+            {
+                var url = dataWebElements[i].GetAttribute("value");
+                var nameLat = GetNameLatCity(url);
+                var nameRus = dataWebElements[i].Text;
+
+                resultCities.Add(new City()
+                {
+                    Key = nameLat,
+                    NameLat = nameLat,
+                    NameRus = nameRus,
+                    Url = url
+                });
+            }
+            return resultCities;
         }
 
         private string GetNameLatCity(string url)

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess
 {
-    public class Bank : IStructure
+    public class Bank
     {
         [Key] public string Key { get; set; }
         public string NameLat { get; set; }

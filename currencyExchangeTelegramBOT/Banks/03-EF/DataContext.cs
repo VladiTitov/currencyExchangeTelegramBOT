@@ -2,7 +2,7 @@
 
 namespace DataAccess
 {
-    public class DataContext : DbContext
+    public sealed class DataContext : DbContext
     {
         public DbSet<City> Cities { get; set; }
         public DbSet<Currency> Currencies { get; set; }
@@ -10,10 +10,8 @@ namespace DataAccess
         public DbSet<Bank> Banks { get; set; }
         public DbSet<Quotation> Quotations { get; set; }
 
-        public DataContext()
-        {
+        public DataContext() =>
             Database.EnsureCreated();
-        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             //optionsBuilder.UseSqlite(@"Data Source=..\\banks.db");

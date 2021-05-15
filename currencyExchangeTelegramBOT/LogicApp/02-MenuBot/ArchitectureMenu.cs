@@ -4,7 +4,7 @@ namespace BusinessLogic
 {
     public static class ArchitectureMenu
     {
-        public static int State { get; set; } = 0;
+        private static int State { get; set; } = 0;
 
         public static void MenuButtonEvent(Button btn, out string message, out IReplyMarkup buttons)
         {

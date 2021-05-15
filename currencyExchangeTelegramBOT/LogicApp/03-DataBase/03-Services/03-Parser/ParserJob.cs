@@ -36,6 +36,12 @@ namespace BusinessLogic
             container.Register<ICityWebDataService, CityWebDataService>(Lifestyle.Singleton);
             container.Register<ICitiesParserRepository, CitiesParserRepository>(Lifestyle.Singleton);
 
+            container.Register<ICurrencyWebDataService, CurrencyDataService>(Lifestyle.Singleton);
+            container.Register<ICurrenciesParserRepository, CurrenciesParserRepository>(Lifestyle.Singleton);
+
+            container.Register<IWebDataService, WebDataService>(Lifestyle.Singleton);
+            container.Register<IMainDataParserRepository, MainDataParserRepository>(Lifestyle.Singleton);
+
             container.Register<IMapper>(() => CreateMapper(), Lifestyle.Singleton);
             container.Register<Parser>(Lifestyle.Singleton);
             container.Verify();

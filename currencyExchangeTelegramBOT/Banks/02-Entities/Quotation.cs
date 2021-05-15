@@ -2,7 +2,7 @@
 
 namespace DataAccess
 {
-    public class Quotation : IQuotes
+    public class Quotation
     {
         [Key] public string Key { get; set; }
         public string Sale { get; set; }

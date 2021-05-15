@@ -4,6 +4,6 @@ namespace BusinessLogic
 {
     public interface ICityWebDataService
     {
-        List<CityDTO> GetData(string key);
+        IEnumerable<CityDTO> GetData(string selector);
     }
 }

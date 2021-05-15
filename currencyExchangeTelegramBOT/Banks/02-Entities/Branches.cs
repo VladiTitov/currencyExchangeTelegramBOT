@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess
 {
-    public class Branches : IBranch
+    public class Branches
     {
         [Key] public string Key { get; set; }
         public string AdrLat { get; set; }

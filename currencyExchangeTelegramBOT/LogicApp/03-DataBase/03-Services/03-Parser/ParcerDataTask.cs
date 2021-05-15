@@ -5,11 +5,14 @@ namespace BusinessLogic
 {
     public class ParserDataTask : Registry
     {
-        public ParserDataTask() =>
+        public ParserDataTask()
+        {
             this.Schedule(() =>
                     new ParserJob())
                 .ToRunOnceAt(DateTime.Now.AddSeconds(5))
-                .AndEvery(10)
+                .AndEvery(15)
                 .Minutes();
+        }
     }
+
 }
