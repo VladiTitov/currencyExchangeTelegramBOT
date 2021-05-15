@@ -19,8 +19,8 @@ namespace BusinessLogic
         public void Add(BranchDTO branch) =>
             _branchRepository.Add(_mapper.Map<Branches>(branch));
 
-        public void Delete(string id) =>
-            _branchRepository.Delete(id);
+        public void Delete(BranchDTO item) =>
+            _branchRepository.Delete(_mapper.Map<Branches>(item));
 
         public List<BranchDTO> GetData() =>
             _mapper.Map<List<BranchDTO>>(_branchRepository.GetAll());

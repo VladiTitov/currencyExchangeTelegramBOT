@@ -7,6 +7,6 @@ namespace BusinessLogic
         List<QuotationDTO> GetData();
         void Add(QuotationDTO quotation);
         void Update(QuotationDTO quotation);
-        void Delete(string id);
+        void Delete(QuotationDTO item);
     }
 }

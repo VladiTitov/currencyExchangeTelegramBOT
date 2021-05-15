@@ -7,6 +7,6 @@ namespace BusinessLogic
         List<BankDTO> GetData();
         void Add(BankDTO bank);
         void Update(BankDTO bank);
-        void Delete(string id);
+        void Delete(BankDTO item);
     }
 }

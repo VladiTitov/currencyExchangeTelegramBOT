@@ -7,10 +7,10 @@ namespace DataAccess.Repo
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private readonly DbContext _context;
+        private readonly DataContext _context;
         private readonly DbSet<TEntity> _dbSet;
 
-        public GenericRepository(DbContext context)
+        public GenericRepository(DataContext context)
         {
             _context = context;
             _dbSet = context.Set<TEntity>();

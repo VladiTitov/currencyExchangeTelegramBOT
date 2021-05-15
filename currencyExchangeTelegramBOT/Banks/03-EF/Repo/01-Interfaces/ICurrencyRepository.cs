@@ -1,13 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace DataAccess.Repo
+﻿namespace DataAccess.Repo
 {
-    public interface ICurrencyRepository
+    public interface ICurrencyRepository : IGenericRepository<Currency>
     {
-        IEnumerable<Currency> Get(string id);
-        IEnumerable<Currency> GetAll();
-        void Add(Currency currency);
-        void Delete(string id);
-        void Update(Currency currency);
     }
 }

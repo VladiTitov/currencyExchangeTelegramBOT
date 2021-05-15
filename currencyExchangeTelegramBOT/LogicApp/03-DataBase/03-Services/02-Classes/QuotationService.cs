@@ -25,7 +25,7 @@ namespace BusinessLogic
         public void Update(QuotationDTO quotation) =>
             _quotationRepository.Update(_mapper.Map<Quotation>(quotation));
 
-        public void Delete(string id) =>
-            _quotationRepository.Delete(id);
+        public void Delete(QuotationDTO item) =>
+            _quotationRepository.Delete(_mapper.Map<Quotation>(item));
     }
 }

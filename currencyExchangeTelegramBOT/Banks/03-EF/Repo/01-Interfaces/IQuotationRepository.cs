@@ -1,13 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace DataAccess.Repo
+﻿namespace DataAccess.Repo
 {
-    public interface IQuotationRepository
+    public interface IQuotationRepository : IGenericRepository<Quotation>
     {
-        IEnumerable<Quotation> Get(string id);
-        IEnumerable<Quotation> GetAll();
-        void Add(Quotation quotation);
-        void Delete(string id);
-        void Update(Quotation quotation);
     }
 }

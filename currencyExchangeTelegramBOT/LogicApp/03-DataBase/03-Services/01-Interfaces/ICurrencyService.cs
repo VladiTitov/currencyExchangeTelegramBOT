@@ -7,6 +7,6 @@ namespace BusinessLogic
         List<CurrencyDTO> GetData();
         void Add(CurrencyDTO currency);
         void Update(CurrencyDTO currency);
-        void Delete(string id);
+        void Delete(CurrencyDTO item);
     }
 }

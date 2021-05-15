@@ -20,22 +20,23 @@ namespace BusinessLogic
         private readonly IQuotationService _quotationService;
 
 
-        public Parser(ICityService cityService, ICityWebDataService cityWebDataService, 
-            ICurrencyService currencyService, ICurrencyWebDataService currencyWebDataService,
-            IWebDataService webDataService, IMainDataParserRepository dataParserRepository,
-            IBranchService branchService, IBankService bankService, IQuotationService quotationService)
+        public Parser(ICityService cityService, ICityWebDataService cityWebDataService
+            //ICurrencyService currencyService, ICurrencyWebDataService currencyWebDataService,
+            //IWebDataService webDataService, IMainDataParserRepository dataParserRepository,
+            //IBranchService branchService, IBankService bankService, IQuotationService quotationService
+            )
         {
             _cityService = cityService;
             _cityWebDataService = cityWebDataService;
 
-            _currencyService = currencyService;
-            _currencyWebDataService = currencyWebDataService;
+            //_currencyService = currencyService;
+            //_currencyWebDataService = currencyWebDataService;
 
-            _webDataService = webDataService;
+            //_webDataService = webDataService;
 
-            _branchService = branchService;
-            _bankService = bankService;
-            _quotationService = quotationService;
+            //_branchService = branchService;
+            //_bankService = bankService;
+            //_quotationService = quotationService;
         }
 
         public void Start()
@@ -47,14 +48,14 @@ namespace BusinessLogic
                 else _cityService.Add(city);
             }
 
-            var currencies = _currencyWebDataService.GetData(".//*/div/select/option");
-            foreach (var currency in currencies)
-            {
-                if (_currencyService.GetData().Any(a => a.Key == currency.Key)) _currencyService.Update(currency);
-                else _currencyService.Add(currency);
-            }
+            //var currencies = _currencyWebDataService.GetData(".//*/div/select/option");
+            //foreach (var currency in currencies)
+            //{
+            //    if (_currencyService.GetData().Any(a => a.Key == currency.Key)) _currencyService.Update(currency);
+            //    else _currencyService.Add(currency);
+            //}
 
-            GetData(_cityService.GetData(), _currencyService.GetData());
+            //GetData(_cityService.GetData(), _currencyService.GetData());
         }
 
         private void GetData(IEnumerable<CityDTO> cities, IEnumerable<CurrencyDTO> currencies)

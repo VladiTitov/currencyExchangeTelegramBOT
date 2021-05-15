@@ -4,9 +4,9 @@ namespace BusinessLogic
 {
     public interface ICityService
     {
-        List<CityDTO> GetData();
-        void Add(CityDTO city);
-        void Update(CityDTO city);
-        void Delete(string id);
+        IEnumerable<CityDTO> GetData();
+        void Add(CityDTO item);
+        void Update(CityDTO item);
+        void Delete(CityDTO item);
     }
 }

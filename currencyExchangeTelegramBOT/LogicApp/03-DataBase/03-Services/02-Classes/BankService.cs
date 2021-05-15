@@ -19,8 +19,8 @@ namespace BusinessLogic
         public void Add(BankDTO bank) =>
             _bankRepository.Add(_mapper.Map<Bank>(bank));
 
-        public void Delete(string id) =>
-            _bankRepository.Delete(id);
+        public void Delete(BankDTO item) =>
+            _bankRepository.Delete(_mapper.Map<Bank>(item));
 
         public List<BankDTO> GetData() =>
             _mapper.Map<List<BankDTO>>(_bankRepository.GetAll());

@@ -25,7 +25,7 @@ namespace BusinessLogic
         public void Update(CurrencyDTO currency) =>
             _currencyRepository.Update(_mapper.Map<Currency>(currency));
 
-        public void Delete(string id) =>
-            _currencyRepository.Delete(id);
+        public void Delete(CurrencyDTO item) =>
+            _currencyRepository.Delete(_mapper.Map<Currency>(item));
     }
 }

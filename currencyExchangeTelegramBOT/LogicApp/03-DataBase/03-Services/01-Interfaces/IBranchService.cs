@@ -7,6 +7,6 @@ namespace BusinessLogic
         List<BranchDTO> GetData();
         void Add(BranchDTO branch);
         void Update(BranchDTO branch);
-        void Delete(string id);
+        void Delete(BranchDTO item);
     }
 }

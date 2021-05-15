@@ -1,13 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace DataAccess.Repo
+﻿namespace DataAccess.Repo
 {
-    public interface ICityRepository
+    public interface ICityRepository : IGenericRepository<City>
     {
-        IEnumerable<City> Get(string id);
-        IEnumerable<City> GetAll();
-        void Add(City city);
-        void Delete(string id);
-        void Update(City city);
     }
 }

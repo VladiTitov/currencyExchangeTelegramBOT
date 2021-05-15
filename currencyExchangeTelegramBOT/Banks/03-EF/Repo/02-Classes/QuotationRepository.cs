@@ -1,50 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repo
 {
-    public class QuotationRepository : IQuotationRepository
+    public class QuotationRepository : GenericRepository<Quotation>, IQuotationRepository
     {
-        public IEnumerable<Quotation> Get(string id)
+        public QuotationRepository(DataContext context) : base(context)
         {
-            using (DataContext db = new DataContext())
-                return db.Quotations.Where(a => a.Key == id).ToList();
-        }
-
-        public IEnumerable<Quotation> GetAll()
-        {
-            using (DataContext db = new DataContext())
-                return db.Quotations.ToList();
-        }
-
-        public void Add(Quotation quotation)
-        {
-            using (DataContext db = new DataContext())
-            {
-                db.Quotations.Add(quotation);
-                db.SaveChanges();
-            }
-        }
-
-        public void Delete(string id)
-        {
-            using (DataContext db = new DataContext())
-            {
-                var tempQuotation = db.Quotations.Find(id);
-                db.Quotations.Remove(tempQuotation);
-                db.SaveChanges();
-            }
-        }
-
-        public void Update(Quotation quotation)
-        {
-            using (DataContext db = new DataContext())
-            {
-                var tempQuotation = db.Quotations.Find(quotation.Key);
-                tempQuotation.Buy = quotation.Buy;
-                tempQuotation.Sale = quotation.Sale;
-                db.SaveChanges();
-            }
         }
     }
 }

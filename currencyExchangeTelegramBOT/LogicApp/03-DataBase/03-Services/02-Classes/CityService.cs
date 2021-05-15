@@ -19,11 +19,11 @@ namespace BusinessLogic
         public void Add(CityDTO city) =>
             _cityRepository.Add(_mapper.Map<City>(city));
 
-        public void Delete(string id) =>
-            _cityRepository.Delete(id);
+        public void Delete(CityDTO item) =>
+            _cityRepository.Delete(_mapper.Map<City>(item));
 
 
-        public List<CityDTO> GetData() =>
+        public IEnumerable<CityDTO> GetData() =>
             _mapper.Map<List<CityDTO>>(_cityRepository.GetAll());
 
         public void Update(CityDTO city) =>
