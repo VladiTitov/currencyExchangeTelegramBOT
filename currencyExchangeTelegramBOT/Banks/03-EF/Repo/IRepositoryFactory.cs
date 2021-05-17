@@ -1,11 +1,11 @@
 ﻿namespace DataAccess.Repo
 {
-    interface IRepositoryFactory
+    public interface IRepositoryFactory
     {
         ICurrencyRepository CreateCurrencyRepository();
         IBankRepository CreateBankRepository();
         ICityRepository CreateCityRepository();
         IQuotationRepository CreateQuotationRepository();
-        IBranchRepository BranchRepository();
+        IBranchRepository CreateBranchRepository();
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace DataAccess.Repo
 {
-    class RepositoryFactory : IRepositoryFactory
+    public class RepositoryFactory : IRepositoryFactory
     {
         public ICurrencyRepository CreateCurrencyRepository()
         {
@@ -22,7 +22,7 @@
             throw new System.NotImplementedException();
         }
 
-        public IBranchRepository BranchRepository()
+        public IBranchRepository CreateBranchRepository()
         {
             throw new System.NotImplementedException();
         }

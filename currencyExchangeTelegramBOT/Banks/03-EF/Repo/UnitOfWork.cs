@@ -4,39 +4,54 @@ namespace DataAccess.Repo
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private DataContext db = new DataContext();
-        private BankRepository _bankRepository;
-        private CityRepository _cityRepository;
-        private CurrencyRepository _currencyRepository;
-        private BranchRepository _branchRepository;
-        private QuotationRepository _quotationRepository;
+        private readonly DataContext _context;
+        private readonly IRepositoryFactory _repositoryFactory;
 
-        private bool disposed = false;
+        private ICurrencyRepository _currencyRepository;
+        private IBankRepository _bankRepository;
+        private ICityRepository _cityRepository;
+        private IBranchRepository _branchRepository;
+        private IQuotationRepository _quotationRepository;
+        private bool _disposed;
 
-        public CityRepository Cities => _cityRepository ??= new CityRepository(db);
-        public CurrencyRepository Currencies => _currencyRepository ??= new CurrencyRepository(db);
-        public BankRepository Banks => _bankRepository ??= new BankRepository(db);
-        public BranchRepository Branches => _branchRepository ??= new BranchRepository(db);
-        public QuotationRepository Quotations => _quotationRepository ??= new QuotationRepository(db);
+        public UnitOfWork(DataContext context, IRepositoryFactory repositoryFactory)
+        {
+            _context = context;
+            _repositoryFactory = repositoryFactory;
+        }
 
-        public IBankRepository BankRepository => throw new NotImplementedException();
+        public IBankRepository BankRepository =>
+            _bankRepository ??= _repositoryFactory.CreateBankRepository();
 
-        public ICurrencyRepository CurrencyRepository => throw new NotImplementedException();
+        public ICurrencyRepository CurrencyRepository =>
+            _currencyRepository ??= _repositoryFactory.CreateCurrencyRepository();
 
-        public ICityRepository CityRepository => throw new NotImplementedException();
+        public ICityRepository CityRepository => 
+            _cityRepository ??= _repositoryFactory.CreateCityRepository();
 
-        public IBranchRepository BranchRepository => throw new NotImplementedException();
+        public IBranchRepository BranchRepository => 
+            _branchRepository ??= _repositoryFactory.CreateBranchRepository();
 
-        public IQuotationRepository QuotationRepository => throw new NotImplementedException();
+        public IQuotationRepository QuotationRepository =>
+            _quotationRepository ??= _repositoryFactory.CreateQuotationRepository();
 
-        public void Save() => db.SaveChanges();
+
+        public void Save() => _context.SaveChanges();
+
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (_disposed) return;
+            if (disposing)
             {
-                if(disposing) db.Dispose();
+                _branchRepository?.Dispose();
+                _currencyRepository?.Dispose();
+                _bankRepository?.Dispose();
+                _quotationRepository?.Dispose();
+                _cityRepository?.Dispose();
             }
+
+            _disposed = true;
         }
 
         public void Dispose()

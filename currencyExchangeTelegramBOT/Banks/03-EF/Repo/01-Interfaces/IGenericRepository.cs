@@ -10,5 +10,6 @@ namespace DataAccess.Repo
         void Add(TEntity bank);
         void Delete(TEntity item);
         void Update(TEntity bank);
+        void Dispose();
     }
 }
