@@ -7,9 +7,9 @@ namespace HtmlParse
     {
         public IEnumerable<Currency> GetCurrencies(string selector, string url)
         {
-            using (var parseData = new GenericRepository())
+            using (var parseData = new GenericRepository(url))
             {
-                IReadOnlyList<IWebElement> dataWebElements = parseData.GetData(By.XPath(selector), url);
+                IReadOnlyList<IWebElement> dataWebElements = parseData.GetData(By.XPath(selector));
 
                 var resultCurrencies = new List<Currency>();
 

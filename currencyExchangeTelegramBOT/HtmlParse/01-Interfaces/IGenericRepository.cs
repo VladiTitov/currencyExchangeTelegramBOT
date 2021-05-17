@@ -5,6 +5,6 @@ namespace HtmlParse
 {
     public  interface IGenericRepository
     {
-        IReadOnlyList<IWebElement> GetData(By selector, string url);
+        IReadOnlyList<IWebElement> GetData(By selector);
     }
 }

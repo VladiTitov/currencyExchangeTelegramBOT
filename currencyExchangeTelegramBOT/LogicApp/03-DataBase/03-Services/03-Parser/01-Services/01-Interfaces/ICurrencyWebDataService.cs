@@ -4,6 +4,6 @@ namespace BusinessLogic
 {
     public interface ICurrencyWebDataService
     {
-        IEnumerable<CurrencyDTO> GetData(string selector);
+        IEnumerable<CurrencyDTO> GetData(string selector, string url);
     }
 }

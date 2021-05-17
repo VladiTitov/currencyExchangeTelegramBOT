@@ -9,13 +9,16 @@ namespace HtmlParse
     {
         private IWebDriver _driver;
 
+        public GenericRepository(string url) =>
+            _driver = new ChromeDriver() {Url = url};
+
+
         public void Dispose() =>
             _driver.Close();
 
-        public IReadOnlyList<IWebElement> GetData(By selector, string url)
-        {
-           _driver = new ChromeDriver() { Url = url };
-           return _driver.FindElements(selector);
-        }
+        public IReadOnlyList<IWebElement> GetData(By selector) => _driver.FindElements(selector);
+
+
+        
     }
 }

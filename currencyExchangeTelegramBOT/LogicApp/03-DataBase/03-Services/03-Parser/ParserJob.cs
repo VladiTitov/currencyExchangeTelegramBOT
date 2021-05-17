@@ -26,26 +26,14 @@ namespace BusinessLogic
             container.Register<IRepositoryFactory, RepositoryFactory>(Lifestyle.Singleton);
             container.Register<ICityService, CityService>(Lifestyle.Singleton);
             container.Register<ICityRepository, CityRepository>(Lifestyle.Singleton);
-            //container.Register<IBankService, BankService>(Lifestyle.Singleton);
-            //container.Register<IBankRepository, BankRepository>(Lifestyle.Singleton);
-
-            //container.Register<IBranchService, BranchService>(Lifestyle.Singleton);
-            //container.Register<IBranchRepository, BranchRepository>(Lifestyle.Singleton);
-
             container.Register<ICurrencyService, CurrencyService>(Lifestyle.Singleton);
             container.Register<ICurrencyRepository, CurrencyRepository>(Lifestyle.Singleton);
-
-            //container.Register<IQuotationService, QuotationService>(Lifestyle.Singleton);
-            //container.Register<IQuotationRepository, QuotationRepository>(Lifestyle.Singleton);
-
             container.Register<ICityWebDataService, CityWebDataService>(Lifestyle.Singleton);
             container.Register<ICitiesParserRepository, CitiesParserRepository>(Lifestyle.Singleton);
-
             container.Register<ICurrencyWebDataService, CurrencyDataService>(Lifestyle.Singleton);
             container.Register<ICurrenciesParserRepository, CurrenciesParserRepository>(Lifestyle.Singleton);
-
-            //container.Register<IWebDataService, WebDataService>(Lifestyle.Singleton);
-            //container.Register<IMainDataParserRepository, MainDataParserRepository>(Lifestyle.Singleton);
+            container.Register<IMainDataParserRepository, MainDataParserRepository>(Lifestyle.Singleton);
+            container.Register<IWebDataService, WebDataService>(Lifestyle.Singleton);
 
             container.Register<IMapper>(() => CreateMapper(), Lifestyle.Singleton);
             container.Register<Parser>(Lifestyle.Singleton);

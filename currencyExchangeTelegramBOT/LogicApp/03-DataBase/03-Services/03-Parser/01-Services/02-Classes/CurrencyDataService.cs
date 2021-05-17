@@ -10,13 +10,13 @@ namespace BusinessLogic
         private readonly ICurrenciesParserRepository _currenciesParserRepository;
         private readonly IMapper _mapper;
 
-        public CurrencyDataService(ICurrenciesParserRepository currenciesParserRepository, ICurrencyRepository currencyRepository, IMapper mapper)
+        public CurrencyDataService(ICurrenciesParserRepository currenciesParserRepository, IMapper mapper)
         {
             _currenciesParserRepository = currenciesParserRepository;
             _mapper = mapper;
         }
 
-        public IEnumerable<CurrencyDTO> GetData(string selector) =>
-            _mapper.Map<List<CurrencyDTO>>(_currenciesParserRepository.GetCurrencies(selector, @"https://m.select.by/kurs"));
+        public IEnumerable<CurrencyDTO> GetData(string selector, string url) =>
+            _mapper.Map<List<CurrencyDTO>>(_currenciesParserRepository.GetCurrencies(selector, url));
     }
 }

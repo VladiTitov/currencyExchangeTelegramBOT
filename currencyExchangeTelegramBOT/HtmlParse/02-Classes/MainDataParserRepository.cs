@@ -2,21 +2,26 @@
 using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace HtmlParse
 {
     public class MainDataParserRepository : IMainDataParserRepository
     {
-        private IWebDriver _driver;
-
         public IEnumerable<IEnumerable<string>> GetData(string selector, string url)
         {
-            using (_driver = new ChromeDriver() { Url = url })
+            using (var parseData = new GenericRepository(url))
             {
-                ClickAllButtons(By.ClassName("expand"));
-                var currencyData = GetWebElements(By.XPath(selector));
-                return DropData(currencyData).Select(ParseData).ToList();
+                var buttons = parseData.GetData(By.ClassName("expand"));
+                foreach (var btn in buttons)
+                {
+                    btn.Click();
+                    Thread.Sleep(300);
+                }
+
+                IReadOnlyList<IWebElement> data = parseData.GetData(By.XPath(selector));
+                var dropData = DropData(data);
+                var result = dropData.Select(ParseData).ToList();
+                return result;
             }
         }
 
@@ -40,20 +45,5 @@ namespace HtmlParse
                     .ToList())
                 .ToList();
         }
-
-
-        private void ClickAllButtons(By selector)
-        {
-            var buttons = GetWebElements(By.ClassName("expand"));
-            foreach (var btn in buttons)
-            {
-                Thread.Sleep(200);
-                btn.Click();
-            }
-        }
-
-        private IReadOnlyCollection<IWebElement> GetWebElements(By selector) => 
-            _driver.FindElements(selector);
-
     }
 }

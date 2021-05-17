@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using HtmlParse;
 
 namespace BusinessLogic
 {
@@ -10,7 +12,8 @@ namespace BusinessLogic
         private readonly ICurrencyService _currencyService;
         private readonly ICurrencyWebDataService _currencyWebDataService;
 
-        //private readonly IWebDataService _webDataService;
+        private readonly IWebDataService _webDataService;
+        private readonly IMainDataParserRepository _dataParserRepository;
 
         //private readonly IBranchService _branchService;
         //private readonly IBankService _bankService;
@@ -18,8 +21,8 @@ namespace BusinessLogic
 
 
         public Parser(ICityService cityService, ICityWebDataService cityWebDataService,
-            ICurrencyService currencyService, ICurrencyWebDataService currencyWebDataService
-            //IWebDataService webDataService, IMainDataParserRepository dataParserRepository,
+            ICurrencyService currencyService, ICurrencyWebDataService currencyWebDataService,
+            IWebDataService webDataService, IMainDataParserRepository dataParserRepository
             //IBranchService branchService, IBankService bankService, IQuotationService quotationService
             )
         {
@@ -29,7 +32,8 @@ namespace BusinessLogic
             _currencyService = currencyService;
             _currencyWebDataService = currencyWebDataService;
 
-            //_webDataService = webDataService;
+            _webDataService = webDataService;
+            _dataParserRepository = dataParserRepository;
 
             //_branchService = branchService;
             //_bankService = bankService;
@@ -45,24 +49,28 @@ namespace BusinessLogic
                 else _cityService.Add(city);
             }
 
-            var currencies = _currencyWebDataService.GetData(".//*/div/select/option");
+            var currencies = _currencyWebDataService.GetData(selector: ".//*/div/select/option", url: @"https://m.select.by/kurs");
             foreach (var currency in currencies)
             {
                 if (_currencyService.GetData().Any(a => a.Key == currency.Key)) _currencyService.Update(currency);
                 else _currencyService.Add(currency);
             }
 
-            //GetData(_cityService.GetData(), _currencyService.GetData());
+            GetData(_cityService.GetData(), _currencyService.GetData());
         }
 
-        //private void GetData(IEnumerable<CityDTO> cities, IEnumerable<CurrencyDTO> currencies)
-        //{
-        //    foreach (var city in cities)
-        //    {
-        //        foreach (var currency in currencies) 
-        //            _webDataService.GetData(selector:".//*/tbody/tr/td/table/tbody/tr/td", 
-        //                url:@"https://select.by" + $"/{city.NameLat}{currency.Url}");
-        //    }
-        //}
+        private void GetData(IEnumerable<CityDTO> cities, IEnumerable<CurrencyDTO> currencies)
+        {
+            foreach (var city in cities)
+            {
+                foreach (var currency in currencies)
+                {
+                    var pr = _webDataService.GetData(
+                        selector: ".//*/tbody/tr/td/table/tbody/tr/td",
+                        url: @"https://select.by" + $"/{city.NameLat}{currency.Url}"
+                        );
+                }
+            }
+        }
     }
 }

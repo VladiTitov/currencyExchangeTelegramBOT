@@ -11,7 +11,6 @@ namespace BusinessLogic
         public WebDataService(IMainDataParserRepository mainDataParserRepository) =>
             _mainDataParserRepository = mainDataParserRepository;
 
-
         public IEnumerable<IEnumerable<string>> GetData(string selector, string url) =>
             _mainDataParserRepository.GetData(selector, url);
     }
