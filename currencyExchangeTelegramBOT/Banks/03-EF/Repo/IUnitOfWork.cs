@@ -2,7 +2,7 @@
 
 namespace DataAccess.Repo
 {
-    interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         IBankRepository BankRepository { get; }
         ICurrencyRepository CurrencyRepository { get; }

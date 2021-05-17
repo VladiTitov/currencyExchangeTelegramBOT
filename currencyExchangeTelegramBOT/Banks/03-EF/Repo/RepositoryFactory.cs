@@ -2,29 +2,24 @@
 {
     public class RepositoryFactory : IRepositoryFactory
     {
-        public ICurrencyRepository CreateCurrencyRepository()
-        {
-            throw new System.NotImplementedException();
-        }
+        private readonly DataContext _context;
 
-        public IBankRepository CreateBankRepository()
-        {
-            throw new System.NotImplementedException();
-        }
+        public RepositoryFactory(DataContext context) =>
+            _context = context;
 
-        public ICityRepository CreateCityRepository()
-        {
-            throw new System.NotImplementedException();
-        }
+        public ICurrencyRepository CreateCurrencyRepository() => 
+            new CurrencyRepository(_context);
 
-        public IQuotationRepository CreateQuotationRepository()
-        {
-            throw new System.NotImplementedException();
-        }
+        public IBankRepository CreateBankRepository() => 
+            new BankRepository(_context);
 
-        public IBranchRepository CreateBranchRepository()
-        {
-            throw new System.NotImplementedException();
-        }
+        public ICityRepository CreateCityRepository() => 
+            new CityRepository(_context);
+
+        public IQuotationRepository CreateQuotationRepository() => 
+            new QuotationRepository(_context);
+
+        public IBranchRepository CreateBranchRepository() => 
+            new BranchRepository(_context);
     }
 }

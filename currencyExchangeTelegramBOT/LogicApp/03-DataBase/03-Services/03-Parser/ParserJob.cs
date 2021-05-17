@@ -22,10 +22,10 @@ namespace BusinessLogic
             var container = new Container();
 
             container.Register<DataContext>(Lifestyle.Singleton);
-
+            container.Register<IUnitOfWork, UnitOfWork>(Lifestyle.Singleton);
+            container.Register<IRepositoryFactory, RepositoryFactory>(Lifestyle.Singleton);
             container.Register<ICityService, CityService>(Lifestyle.Singleton);
             container.Register<ICityRepository, CityRepository>(Lifestyle.Singleton);
-
             //container.Register<IBankService, BankService>(Lifestyle.Singleton);
             //container.Register<IBankRepository, BankRepository>(Lifestyle.Singleton);
 

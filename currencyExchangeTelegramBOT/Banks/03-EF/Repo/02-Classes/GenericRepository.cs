@@ -44,5 +44,8 @@ namespace DataAccess.Repo
             _context.Entry(item).State = EntityState.Modified;
                 _context.SaveChanges();
         }
+
+        public void Dispose() { }
+        
     }
 }
