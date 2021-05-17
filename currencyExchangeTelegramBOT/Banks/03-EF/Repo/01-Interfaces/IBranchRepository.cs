@@ -1,6 +1,4 @@
 ﻿namespace DataAccess.Repo
 {
-    public interface IBranchRepository : IGenericRepository<Branches>
-    {
-    }
+    public interface IBranchRepository : IGenericRepository<Branches> { }
 }

@@ -4,8 +4,6 @@ namespace DataAccess.Repo
 {
     public class QuotationRepository : GenericRepository<Quotation>, IQuotationRepository
     {
-        public QuotationRepository(DataContext context) : base(context)
-        {
-        }
+        public QuotationRepository(DataContext context) : base(context) { }
     }
 }

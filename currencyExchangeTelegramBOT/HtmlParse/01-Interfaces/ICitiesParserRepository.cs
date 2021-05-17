@@ -4,7 +4,7 @@ using DataAccess;
 namespace HtmlParse
 {
     public interface ICitiesParserRepository
-    { 
-        IEnumerable<City> GetData(string selector ,string url);
+    {
+        IEnumerable<City> GetCities(string selector, string url);
     }
 }

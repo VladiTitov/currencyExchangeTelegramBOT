@@ -8,8 +8,6 @@
         public string Buy { get; set; }
         public string Sale { get; set; }
 
-        public SiteData() { }
-
         public SiteData(string bank, string adr, string phone, string buy, string sale)
         {
             Bank = bank;

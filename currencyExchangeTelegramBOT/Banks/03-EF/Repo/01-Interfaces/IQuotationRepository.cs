@@ -1,6 +1,4 @@
 ﻿namespace DataAccess.Repo
 {
-    public interface IQuotationRepository : IGenericRepository<Quotation>
-    {
-    }
+    public interface IQuotationRepository : IGenericRepository<Quotation> { }
 }

@@ -1,6 +1,4 @@
 ﻿namespace DataAccess.Repo
 {
-    public interface ICityRepository : IGenericRepository<City>
-    {
-    }
+    public interface ICityRepository : IGenericRepository<City> { }
 }

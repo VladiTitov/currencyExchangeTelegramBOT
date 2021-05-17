@@ -18,20 +18,14 @@ namespace DataAccess.Repo
 
         public void Add(TEntity item)
         {
-            using (_context)
-            {
-                _dbSet.Add(item);
+            _dbSet.Add(item);
                 _context.SaveChanges();
-            }
         }
 
         public void Delete(TEntity item)
         {
-            using (_context)
-            {
-                _dbSet.Remove(item);
+            _dbSet.Remove(item);
                 _context.SaveChanges();
-            }
         }
 
         public IEnumerable<TEntity> Get(Func<TEntity, bool> predicate)
@@ -47,11 +41,8 @@ namespace DataAccess.Repo
 
         public void Update(TEntity item)
         {
-            using (_context)
-            {
-                _context.Entry(item).State = EntityState.Modified;
+            _context.Entry(item).State = EntityState.Modified;
                 _context.SaveChanges();
-            }
         }
     }
 }

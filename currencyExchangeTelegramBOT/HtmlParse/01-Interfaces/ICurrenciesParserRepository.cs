@@ -5,6 +5,6 @@ namespace HtmlParse
 {
     public interface ICurrenciesParserRepository
     {
-        IEnumerable<Currency> GetData(string selector, string url);
+        IEnumerable<Currency> GetCurrencies(string selector, string url);
     }
 }

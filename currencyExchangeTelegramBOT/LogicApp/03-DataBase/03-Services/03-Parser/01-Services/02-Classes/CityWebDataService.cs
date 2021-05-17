@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
 using HtmlParse;
-using OpenQA.Selenium;
 
 namespace BusinessLogic
 {
@@ -16,7 +15,7 @@ namespace BusinessLogic
             _mapper = mapper;
         }
 
-        public IEnumerable<CityDTO> GetData(string selector) =>
-            _mapper.Map<List<CityDTO>>(_citiesParserModel.GetData(selector, @"https://m.select.by/kurs"));
+        public IEnumerable<CityDTO> GetData(string selector, string url) =>
+            _mapper.Map<List<CityDTO>>(_citiesParserModel.GetCities(selector, url));
     }
 }

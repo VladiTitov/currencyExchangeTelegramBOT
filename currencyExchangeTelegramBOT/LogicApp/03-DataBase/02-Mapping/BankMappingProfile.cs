@@ -7,6 +7,5 @@ namespace BusinessLogic
     {
         public BankMappingProfile() =>
             CreateMap<Bank, BankDTO>().ReverseMap();
-
     }
 }

@@ -5,7 +5,7 @@ using DataAccess.Repo;
 
 namespace BusinessLogic
 {
-    public class CityService : ICityService
+    public class CityService
     {
         private readonly ICityRepository _cityRepository;
         private readonly IMapper _mapper;
@@ -28,5 +28,6 @@ namespace BusinessLogic
 
         public void Update(CityDTO city) =>
             _cityRepository.Update(_mapper.Map<City>(city));
+
     }
 }

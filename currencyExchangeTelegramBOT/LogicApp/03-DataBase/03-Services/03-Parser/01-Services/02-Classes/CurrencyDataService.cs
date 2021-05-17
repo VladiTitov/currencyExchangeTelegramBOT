@@ -17,6 +17,6 @@ namespace BusinessLogic
         }
 
         public IEnumerable<CurrencyDTO> GetData(string selector) =>
-            _mapper.Map<List<CurrencyDTO>>(_currenciesParserRepository.GetData(selector, @"https://m.select.by/kurs"));
+            _mapper.Map<List<CurrencyDTO>>(_currenciesParserRepository.GetCurrencies(selector, @"https://m.select.by/kurs"));
     }
 }

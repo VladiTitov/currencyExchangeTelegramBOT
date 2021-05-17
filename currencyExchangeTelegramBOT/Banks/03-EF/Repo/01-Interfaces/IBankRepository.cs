@@ -1,6 +1,4 @@
 ﻿namespace DataAccess.Repo
 {
-    public interface IBankRepository : IGenericRepository<Bank>
-    {
-    }
+    public interface IBankRepository : IGenericRepository<Bank> { }
 }
