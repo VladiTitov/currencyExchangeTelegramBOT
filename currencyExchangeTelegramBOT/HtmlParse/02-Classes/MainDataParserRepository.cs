@@ -11,14 +11,14 @@ namespace HtmlParse
         {
             using (var parseData = new GenericRepository(url))
             {
-                var buttons = parseData.GetData(By.ClassName("expand"));
+                var buttons = parseData.GetDataList(By.ClassName("expand"));
                 foreach (var btn in buttons)
                 {
                     btn.Click();
                     Thread.Sleep(300);
                 }
 
-                IReadOnlyList<IWebElement> data = parseData.GetData(By.XPath(selector));
+                IReadOnlyList<IWebElement> data = parseData.GetDataList(By.XPath(selector));
                 var dropData = DropData(data);
                 var result = dropData.Select(ParseData).ToList();
                 return result;

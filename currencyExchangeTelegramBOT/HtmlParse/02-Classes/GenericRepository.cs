@@ -7,7 +7,7 @@ namespace HtmlParse
 {
     public class GenericRepository : IGenericRepository, IDisposable
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
         public GenericRepository(string url) =>
             _driver = new ChromeDriver() {Url = url};
@@ -16,9 +16,10 @@ namespace HtmlParse
         public void Dispose() =>
             _driver.Close();
 
-        public IReadOnlyList<IWebElement> GetData(By selector) => _driver.FindElements(selector);
+        public IWebElement GetData(By selector) => 
+            _driver.FindElement(selector);
 
-
-        
+        public IReadOnlyList<IWebElement> GetDataList(By selector) =>
+            _driver.FindElements(selector);
     }
 }

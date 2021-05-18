@@ -69,6 +69,7 @@ namespace BusinessLogic
                         selector: ".//*/tbody/tr/td/table/tbody/tr/td",
                         url: @"https://select.by" + $"/{city.NameLat}{currency.Url}"
                         );
+
                 }
             }
         }

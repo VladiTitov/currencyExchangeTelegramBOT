@@ -10,7 +10,7 @@ namespace HtmlParse
         {
             using (var parserData = new GenericRepository(url))
             {
-                var dataWebElements = parserData.GetData(By.XPath(selector));
+                var dataWebElements = parserData.GetDataList(By.XPath(selector));
                 var resultCities = new List<City>();
 
                 for (int i = 1; i < dataWebElements.Count; i++)
