@@ -1,6 +1,6 @@
 ﻿namespace DataAccess
 {
-    class BaseEntityClass
+    public class BaseEntityClass
     {
         public string Bank { get; set; }
         public string Adr { get; set; }

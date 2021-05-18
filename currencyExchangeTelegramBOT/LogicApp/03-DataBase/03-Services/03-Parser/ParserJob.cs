@@ -55,7 +55,8 @@ namespace BusinessLogic
                 new BranchMappingProfile(),
                 new CityMappingProfile(),
                 new CurrencyMappingProfile(),
-                new QuotationMappingProfile()
+                new QuotationMappingProfile(),
+                new BaseEntityMappingProfile()
             }));
             var mapper = config.CreateMapper();
             return mapper;

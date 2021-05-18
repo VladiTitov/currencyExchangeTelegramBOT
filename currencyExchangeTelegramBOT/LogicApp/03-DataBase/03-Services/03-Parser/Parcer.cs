@@ -65,8 +65,7 @@ namespace BusinessLogic
                     var pr = _webDataService.GetData(
                         selector: ".//*/tbody/tr/td/table/tbody/tr/td",
                         url: @"https://select.by" + $"/{city.NameLat}{currency.Url}"
-                        );
-
+                    );
                 }
             }
         }

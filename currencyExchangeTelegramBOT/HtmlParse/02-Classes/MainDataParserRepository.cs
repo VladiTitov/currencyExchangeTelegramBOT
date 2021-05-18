@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using DataAccess;
 using OpenQA.Selenium;
 
 namespace HtmlParse
 {
     public class MainDataParserRepository : IMainDataParserRepository
     {
-        public IEnumerable<IEnumerable<string>> GetData(string selector, string url)
+        public IEnumerable<BaseEntityClass> GetData(string selector, string url)
         {
             using (var parseData = new GenericRepository(url))
             {
@@ -18,23 +19,23 @@ namespace HtmlParse
                     Thread.Sleep(300);
                 }
 
-                IReadOnlyList<IWebElement> data = parseData.GetDataList(By.XPath(selector));
+                var data = parseData.GetDataList(By.XPath(selector));
                 var dropData = DropData(data);
                 var result = dropData.Select(ParseData).ToList();
                 return result;
             }
         }
 
-        private static List<string> ParseData(List<IWebElement> elements)
+        private static BaseEntityClass ParseData(List<IWebElement> elements)
         {
             string[] nameAndAdr = elements[0].FindElement(By.ClassName("btn-tomap")).GetAttribute("data-name").Split(": ");
-            string phones = elements[0].FindElement(By.ClassName("phones")).Text;
-            string bankName = nameAndAdr[0];
-            string adr = nameAndAdr[1];
-            string bestBuy = elements[1].Text;
-            string bestSale = elements[2].Text;
+            string _phones = elements[0].FindElement(By.ClassName("phones")).Text;
+            string _bankName = nameAndAdr[0];
+            string _adr = nameAndAdr[1];
+            string _bestBuy = elements[1].Text;
+            string _bestSale = elements[2].Text;
 
-            return new List<string>() { phones, bankName, adr, bestBuy, bestSale };
+            return new BaseEntityClass(_bankName, _adr, _phones, _bestBuy, _bestSale);
         }
 
         private static IEnumerable<List<IWebElement>> DropData(IReadOnlyCollection<IWebElement> data)

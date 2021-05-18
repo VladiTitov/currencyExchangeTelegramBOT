@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using DataAccess;
 
 namespace HtmlParse
 {
     public interface IMainDataParserRepository
     {
-        IEnumerable<IEnumerable<string>> GetData(string selector, string url);
+        IEnumerable<BaseEntityClass> GetData(string selector, string url);
     }
 }
