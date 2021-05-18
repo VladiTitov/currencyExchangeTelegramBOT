@@ -1,6 +1,6 @@
 ﻿namespace DataAccess
 {
-    public class SiteData
+    class BaseEntityClass
     {
         public string Bank { get; set; }
         public string Adr { get; set; }
@@ -8,7 +8,12 @@
         public string Buy { get; set; }
         public string Sale { get; set; }
 
-        public SiteData(string bank, string adr, string phone, string buy, string sale)
+        public BaseEntityClass(
+            string bank, 
+            string adr, 
+            string phone, 
+            string buy, 
+            string sale)
         {
             Bank = bank;
             Adr = adr;

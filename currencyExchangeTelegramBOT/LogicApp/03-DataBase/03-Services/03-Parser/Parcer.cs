@@ -15,29 +15,26 @@ namespace BusinessLogic
         private readonly IWebDataService _webDataService;
         private readonly IMainDataParserRepository _dataParserRepository;
 
-        //private readonly IBranchService _branchService;
-        //private readonly IBankService _bankService;
-        //private readonly IQuotationService _quotationService;
+        private readonly IBranchService _branchService;
+        private readonly IBankService _bankService;
+        private readonly IQuotationService _quotationService;
 
 
         public Parser(ICityService cityService, ICityWebDataService cityWebDataService,
             ICurrencyService currencyService, ICurrencyWebDataService currencyWebDataService,
-            IWebDataService webDataService, IMainDataParserRepository dataParserRepository
-            //IBranchService branchService, IBankService bankService, IQuotationService quotationService
+            IWebDataService webDataService, IMainDataParserRepository dataParserRepository,
+            IBranchService branchService, IBankService bankService, IQuotationService quotationService
             )
         {
             _cityService = cityService;
             _cityWebDataService = cityWebDataService;
-
             _currencyService = currencyService;
             _currencyWebDataService = currencyWebDataService;
-
             _webDataService = webDataService;
             _dataParserRepository = dataParserRepository;
-
-            //_branchService = branchService;
-            //_bankService = bankService;
-            //_quotationService = quotationService;
+            _branchService = branchService;
+            _bankService = bankService;
+            _quotationService = quotationService;
         }
 
         public void Start()
