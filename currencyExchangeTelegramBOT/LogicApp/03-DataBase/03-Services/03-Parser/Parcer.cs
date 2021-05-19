@@ -53,21 +53,35 @@ namespace BusinessLogic
                 else _currencyService.Add(currency);
             }
 
-            GetData(_cityService.GetData(), _currencyService.GetData());
+            var result = GetData(_cityService.GetData(), _currencyService.GetData());
         }
 
-        private void GetData(IEnumerable<CityDTO> cities, IEnumerable<CurrencyDTO> currencies)
+        private IEnumerable<BaseEntityDTO> GetData(IEnumerable<CityDTO> cities, IEnumerable<CurrencyDTO> currencies)
         {
+            var result = new List<BaseEntityDTO>();
+
             foreach (var city in cities)
             {
                 foreach (var currency in currencies)
                 {
                     var pr = _webDataService.GetData(
                         selector: ".//*/tbody/tr/td/table/tbody/tr/td",
-                        url: @"https://select.by" + $"/{city.NameLat}{currency.Url}"
-                    );
+                        url: @"https://select.by" + $"/{city.NameLat}{currency.Url}");
+                    foreach (var p in pr)
+                    {
+                        _bankService.Add(p);
+                        _branchService.Add(p);
+                        _quotationService.Add(new QuotationDTO());
+                        
+                    }
+
+                    //result.AddRange(_webDataService.GetData(
+                    //    selector: ".//*/tbody/tr/td/table/tbody/tr/td",
+                    //    url: @"https://select.by" + $"/{city.NameLat}{currency.Url}"
+                    //)); 
                 }
             }
+            return result;
         }
     }
 }

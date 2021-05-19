@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DataAccess;
 using DataAccess.Repo;
@@ -16,16 +17,19 @@ namespace BusinessLogic
             _mapper = mapper;
         }
 
-        public void Add(BankDTO bank) =>
-            _bankRepository.Add(_mapper.Map<Bank>(bank));
-
-        public void Delete(BankDTO item) =>
+        public void Add(BaseEntityDTO bank)
+        {
+            if (_bankRepository.GetAll().Any(a => a.Key == bank.Bank)) Update(bank);
+            else _bankRepository.Add(_mapper.Map<Bank>(bank));
+        }
+        
+        public void Delete(BaseEntityDTO item) =>
             _bankRepository.Delete(_mapper.Map<Bank>(item));
 
         public List<BankDTO> GetData() =>
             _mapper.Map<List<BankDTO>>(_bankRepository.GetAll());
 
-        public void Update(BankDTO bank) =>
+        public void Update(BaseEntityDTO bank) =>
             _bankRepository.Update(_mapper.Map<Bank>(bank));
     }
 }

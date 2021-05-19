@@ -16,16 +16,16 @@ namespace BusinessLogic
             _mapper = mapper;
         }
 
-        public void Add(BranchDTO branch) =>
+        public void Add(BaseEntityDTO branch) =>
             _branchRepository.Add(_mapper.Map<Branches>(branch));
 
-        public void Delete(BranchDTO item) =>
+        public void Delete(BaseEntityDTO item) =>
             _branchRepository.Delete(_mapper.Map<Branches>(item));
 
         public List<BranchDTO> GetData() =>
             _mapper.Map<List<BranchDTO>>(_branchRepository.GetAll());
 
-        public void Update(BranchDTO branch) =>
+        public void Update(BaseEntityDTO branch) =>
             _branchRepository.Update(_mapper.Map<Branches>(branch));
     }
 }
