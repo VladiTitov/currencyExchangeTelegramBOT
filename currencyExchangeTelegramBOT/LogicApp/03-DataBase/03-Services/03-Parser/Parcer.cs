@@ -70,8 +70,8 @@ namespace BusinessLogic
                     foreach (var p in pr)
                     {
                         _bankService.Add(p);
-                        _branchService.Add(p);
-                        _quotationService.Add(new QuotationDTO());
+                        //_branchService.Add(p);
+                        //_quotationService.Add(new QuotationDTO());
                         
                     }
 

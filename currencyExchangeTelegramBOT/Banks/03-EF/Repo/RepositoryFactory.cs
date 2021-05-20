@@ -21,5 +21,8 @@
 
         public IBranchRepository CreateBranchRepository() => 
             new BranchRepository(_context);
+
+        public IPhoneRepository CreatePhoneRepository() =>
+            new PhoneRepository(_context);
     }
 }

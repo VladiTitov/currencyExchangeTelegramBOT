@@ -9,6 +9,7 @@ namespace DataAccess.Repo
         ICityRepository CityRepository { get; }
         IBranchRepository BranchRepository { get; }
         IQuotationRepository QuotationRepository { get; }
+        IPhoneRepository PhoneRepository { get; }
 
         void Save();
     }

@@ -5,7 +5,7 @@ namespace DataAccess
 {
     public class City
     {
-        [Key] public string Key { get; set; }
+        [Key] public int Key { get; set; }
         public string NameLat { get; set; }
         public string NameRus { get; set; }
         public string Url { get; set; }

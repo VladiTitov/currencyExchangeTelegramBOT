@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using AutoMapper.Configuration.Annotations;
 using DataAccess;
 using DataAccess.Repo;
 
@@ -19,8 +20,10 @@ namespace BusinessLogic
 
         public void Add(BaseEntityDTO bank)
         {
-            if (_bankRepository.GetAll().Any(a => a.Key == bank.Bank)) Update(bank);
-            else _bankRepository.Add(_mapper.Map<Bank>(bank));
+            var data = _bankRepository.GetAll();
+            if (data.Any(a => a.NameRus == bank.Bank)) return;
+            //bank.BankId = data.Count();
+            _bankRepository.Add(_mapper.Map<Bank>(bank));
         }
         
         public void Delete(BaseEntityDTO item) =>

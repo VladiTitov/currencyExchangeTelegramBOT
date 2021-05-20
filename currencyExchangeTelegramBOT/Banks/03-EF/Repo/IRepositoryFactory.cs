@@ -7,5 +7,6 @@
         ICityRepository CreateCityRepository();
         IQuotationRepository CreateQuotationRepository();
         IBranchRepository CreateBranchRepository();
+        IPhoneRepository CreatePhoneRepository();
     }
 }

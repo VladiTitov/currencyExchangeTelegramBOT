@@ -9,6 +9,7 @@ namespace DataAccess.Repo
         public DbSet<Branches> Branches { get; set; }
         public DbSet<Bank> Banks { get; set; }
         public DbSet<Quotation> Quotations { get; set; }
+        public DbSet<Phone> Phones { get; set; }
 
         public DataContext() => Database.EnsureCreated();
 
