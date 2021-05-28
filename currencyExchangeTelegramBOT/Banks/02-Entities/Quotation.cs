@@ -4,7 +4,8 @@ namespace DataAccess
 {
     public class Quotation
     {
-        [Key] public int Key { get; set; }
+        [Key] 
+        public int Key { get; set; }
         public string Sale { get; set; }
         public string Buy { get; set; }
 

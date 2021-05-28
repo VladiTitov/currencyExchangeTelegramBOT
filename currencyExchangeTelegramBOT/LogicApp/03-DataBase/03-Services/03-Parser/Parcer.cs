@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using HtmlParse;
 
 namespace BusinessLogic
@@ -40,21 +40,14 @@ namespace BusinessLogic
         public void Start()
         {
             var cities =  _cityWebDataService.GetData(selector: ".//*/li/select/option", url: @"https://m.select.by/kurs");
-            foreach (var city in cities)
-            {
-                if (_cityService.GetData().Any(a=>a.Key == city.Key)) _cityService.Update(city);
-                else _cityService.Add(city);
-            }
+            foreach (var city in cities) _cityService.Add(city);
 
             var currencies = _currencyWebDataService.GetData(selector: ".//*/div/select/option", url: @"https://m.select.by/kurs");
-            foreach (var currency in currencies)
-            {
-                if (_currencyService.GetData().Any(a => a.Key == currency.Key)) _currencyService.Update(currency);
-                else _currencyService.Add(currency);
-            }
+            foreach (var currency in currencies) _currencyService.Add(currency);
 
             var result = GetData(_cityService.GetData(), _currencyService.GetData());
         }
+
 
         private IEnumerable<BaseEntityDTO> GetData(IEnumerable<CityDTO> cities, IEnumerable<CurrencyDTO> currencies)
         {
@@ -70,7 +63,12 @@ namespace BusinessLogic
                     foreach (var p in pr)
                     {
                         _bankService.Add(p);
-                        //_branchService.Add(p);
+
+                        _branchService.Add(new BranchDTO
+                        {
+                            AdrRus = p.Adr,
+                            AdrLat = p.Adr
+                        });
                         //_quotationService.Add(new QuotationDTO());
                         
                     }

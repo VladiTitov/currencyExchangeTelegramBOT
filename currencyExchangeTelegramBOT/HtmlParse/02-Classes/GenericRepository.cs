@@ -12,7 +12,6 @@ namespace HtmlParse
         public GenericRepository(string url) =>
             _driver = new ChromeDriver() {Url = url};
 
-
         public void Dispose() =>
             _driver.Close();
 

@@ -10,6 +10,9 @@ namespace DataAccess
         public string NameRus { get; set; }
         public string Url { get; set; }
 
+        public City() =>
+            Branches = new List<Branches>();
+
         public ICollection<Branches> Branches { get; set; }
     }
 }

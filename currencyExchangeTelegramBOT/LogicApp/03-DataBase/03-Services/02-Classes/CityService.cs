@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DataAccess;
 using DataAccess.Repo;
@@ -16,10 +17,12 @@ namespace BusinessLogic
             _mapper = mapper;
         }
 
-        public void Add(CityDTO city) =>
-            _unitOfWork.CityRepository.Add(_mapper.Map<City>(city));
+        public void Add(CityDTO city)
+        {
+            if (_unitOfWork.CityRepository.GetAll().All(a => a.NameRus != city.NameRus)) 
+                _unitOfWork.CityRepository.Add(_mapper.Map<City>(city));
+        }
 
-        
         public void Delete(CityDTO item) =>
             _unitOfWork.CityRepository.Delete(_mapper.Map<City>(item));
 

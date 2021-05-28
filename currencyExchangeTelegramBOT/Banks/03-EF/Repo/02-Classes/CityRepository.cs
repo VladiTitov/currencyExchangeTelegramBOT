@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace DataAccess.Repo
+﻿namespace DataAccess.Repo
 {
     public class CityRepository : GenericRepository<City>, ICityRepository
     {

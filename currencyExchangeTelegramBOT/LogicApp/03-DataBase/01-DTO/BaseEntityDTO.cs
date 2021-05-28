@@ -1,4 +1,6 @@
-﻿namespace BusinessLogic
+﻿using System.Collections.Generic;
+
+namespace BusinessLogic
 {
     public class BaseEntityDTO
     {

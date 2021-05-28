@@ -19,9 +19,8 @@ namespace HtmlParse
                     var nameLat = GetNameLatCity(tempUrl);
                     var nameRus = dataWebElements[i].Text;
 
-                    resultCities.Add(new City()
+                    resultCities.Add(new City
                     {
-                        Key = nameLat,
                         NameLat = nameLat,
                         NameRus = nameRus,
                         Url = tempUrl

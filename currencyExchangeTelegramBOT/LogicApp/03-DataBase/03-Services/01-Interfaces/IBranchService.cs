@@ -5,8 +5,8 @@ namespace BusinessLogic
     public interface IBranchService
     {
         List<BranchDTO> GetData();
-        void Add(BaseEntityDTO branch);
-        void Update(BaseEntityDTO branch);
-        void Delete(BaseEntityDTO item);
+        void Add(BranchDTO branch);
+        void Update(BranchDTO branch);
+        void Delete(BranchDTO item);
     }
 }

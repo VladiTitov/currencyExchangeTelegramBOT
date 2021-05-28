@@ -18,9 +18,8 @@ namespace HtmlParse
                     var nameLat = dataWebElements[i].Text.Split(' ')[0];
                     var nameRus = dataWebElements[i].Text.TrimStart(nameLat.ToCharArray());
 
-                    resultCurrencies.Add(new Currency()
+                    resultCurrencies.Add(new Currency
                     {
-                        Key = nameLat,
                         NameLat = nameLat,
                         NameRus = nameRus,
                         Url = dataWebElements[i].GetAttribute("value")

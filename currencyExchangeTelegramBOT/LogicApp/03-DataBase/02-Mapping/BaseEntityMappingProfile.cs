@@ -5,7 +5,7 @@ namespace BusinessLogic
 {
     class BaseEntityMappingProfile : Profile
     {
-        public BaseEntityMappingProfile() =>
+        public BaseEntityMappingProfile() => 
             CreateMap<BaseEntityClass, BaseEntityDTO>().ReverseMap();
     }
 }

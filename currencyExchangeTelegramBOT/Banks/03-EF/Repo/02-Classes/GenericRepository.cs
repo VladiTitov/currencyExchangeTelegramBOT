@@ -16,7 +16,7 @@ namespace DataAccess.Repo
             _dbSet = context.Set<TEntity>();
         }
 
-        public void Add(TEntity item)
+        public virtual void Add(TEntity item)
         {
             _dbSet.Add(item);
                 _context.SaveChanges();
@@ -46,6 +46,5 @@ namespace DataAccess.Repo
         }
 
         public void Dispose() { }
-        
     }
 }

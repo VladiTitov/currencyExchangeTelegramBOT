@@ -10,6 +10,9 @@ namespace DataAccess
         public string NameRus { get; set; }
         public string Url { get; set; }
 
+        public Currency() =>
+            Quotations = new List<Quotation>();
+
         public ICollection<Quotation> Quotations { get; set; }
     }
 }

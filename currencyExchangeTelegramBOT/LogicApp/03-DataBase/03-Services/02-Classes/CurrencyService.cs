@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DataAccess;
 using DataAccess.Repo;
@@ -7,25 +8,28 @@ namespace BusinessLogic
 {
     class CurrencyService : ICurrencyService
     {
-        private readonly ICurrencyRepository _currencyRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CurrencyService(ICurrencyRepository currencyRepository, IMapper mapper)
+        public CurrencyService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _currencyRepository = currencyRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public List<CurrencyDTO> GetData() =>
-            _mapper.Map<List<CurrencyDTO>>(_currencyRepository.GetAll());
+            _mapper.Map<List<CurrencyDTO>>(_unitOfWork.CurrencyRepository.GetAll());
 
-        public void Add(CurrencyDTO currency) =>
-            _currencyRepository.Add(_mapper.Map<Currency>(currency));
-
+        public void Add(CurrencyDTO currency)
+        {
+            if (_unitOfWork.CurrencyRepository.GetAll().All(a=>a.NameRus!= currency.NameRus)) 
+                _unitOfWork.CurrencyRepository.Add(_mapper.Map<Currency>(currency));
+        }
+        
         public void Update(CurrencyDTO currency) =>
-            _currencyRepository.Update(_mapper.Map<Currency>(currency));
+            _unitOfWork.CurrencyRepository.Update(_mapper.Map<Currency>(currency));
 
         public void Delete(CurrencyDTO item) =>
-            _currencyRepository.Delete(_mapper.Map<Currency>(item));
+            _unitOfWork.CurrencyRepository.Delete(_mapper.Map<Currency>(item));
     }
 }

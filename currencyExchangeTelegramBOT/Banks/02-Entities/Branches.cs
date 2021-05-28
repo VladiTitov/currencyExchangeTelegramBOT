@@ -5,12 +5,20 @@ namespace DataAccess
 {
     public class Branches
     {
-        [Key] public int Key { get; set; }
+
+        [Key] 
+        public int Key { get; set; }
         public string AdrLat { get; set; }
         public string AdrRus { get; set; }
 
         public ICollection<Quotation> Quotations { get; set; }
         public ICollection<Phone> Phones { get; set; }
+
+        public Branches()
+        {
+            Quotations = new List<Quotation>();
+            Phones = new List<Phone>();
+        }
 
         public int? BankId { get; set; }
         public Bank Bank { get; set; }
