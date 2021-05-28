@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
+using DataAccess;
 using HtmlParse;
 
 namespace BusinessLogic
@@ -80,6 +81,29 @@ namespace BusinessLogic
                 }
             }
             return result;
+        }
+
+        private void GetObjects(BaseEntityDTO baseEntity)
+        {
+            new BankDTO
+            {
+                NameLat = baseEntity.Bank,
+                NameRus = baseEntity.Bank
+            };
+            new BranchDTO
+            {
+                AdrLat = baseEntity.Adr,
+                AdrRus = baseEntity.Adr
+            };
+            new QuotationDTO
+            {
+                Buy = baseEntity.Buy,
+                Sale = baseEntity.Sale
+            };
+            new PhoneDTO
+            {
+                PhoneNum = baseEntity.Phone
+            };
         }
     }
 }
