@@ -7,8 +7,9 @@ namespace BusinessLogic
     public interface IBankService
     {
         List<BankDTO> GetData();
-        void Add(BankDTO bank);
-        void Update(BankDTO bank);
+        void Add(BankDTO item);
+        void Update(BankDTO item);
         void Delete(BankDTO item);
+        IEnumerable<BankDTO> GetWithInclude(BankDTO item);
     }
 }

@@ -19,10 +19,10 @@ namespace BusinessLogic
             _mapper = mapper;
         }
 
-        public void Add(BankDTO bank)
+        public void Add(BankDTO item)
         {
-            if (_unitOfWork.BankRepository.GetAll().All(a => a.NameRus != bank.NameRus))
-                _unitOfWork.BankRepository.Add(_mapper.Map<Bank>(bank));
+            if (_unitOfWork.BankRepository.GetAll().All(a => a.NameRus != item.NameRus))
+                _unitOfWork.BankRepository.Add(_mapper.Map<Bank>(item));
         }
         
         public void Delete(BankDTO item) =>
@@ -31,7 +31,10 @@ namespace BusinessLogic
         public List<BankDTO> GetData() =>
             _mapper.Map<List<BankDTO>>(_unitOfWork.BankRepository.GetAll());
 
-        public void Update(BankDTO bank) =>
-            _unitOfWork.BankRepository.Update(_mapper.Map<Bank>(bank));
+        public IEnumerable<BankDTO> GetWithInclude(BankDTO item) =>
+            _mapper.Map<IEnumerable<BankDTO>>(_unitOfWork.BankRepository.GetWithInclude(bank => bank.NameLat == item.NameLat));
+
+        public void Update(BankDTO item) =>
+            _unitOfWork.BankRepository.Update(_mapper.Map<Bank>(item));
     }
 }

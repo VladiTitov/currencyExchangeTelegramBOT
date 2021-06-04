@@ -65,13 +65,12 @@ namespace BusinessLogic
                         var (bank, branch, quotation, phone) = GetObjects(d);
                         
                         _bankService.Add(bank);
-                        
-                        //var tempBank = _bankService.GetData().FirstOrDefault(a => a.NameRus == bank.NameRus);
+
+                        var pr = _bankService.GetWithInclude(bank);
 
                         //branch.BankDto = tempBank;
                         //branch.CityDto = city;
 
-                        //var temp = branch;
 
                         //_branchService.Add(branch);
 
