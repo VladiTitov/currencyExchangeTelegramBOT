@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using DataAccess;
+using System.Linq;
 using HtmlParse;
 
 namespace BusinessLogic
@@ -58,20 +57,27 @@ namespace BusinessLogic
             {
                 foreach (var currency in currencies)
                 {
-                    var pr = _webDataService.GetData(
+                    var data = _webDataService.GetData(
                         selector: ".//*/tbody/tr/td/table/tbody/tr/td",
                         url: @"https://select.by" + $"/{city.NameLat}{currency.Url}");
-                    foreach (var p in pr)
+                    foreach (var d in data)
                     {
-                        _bankService.Add(p);
-
-                        _branchService.Add(new BranchDTO
-                        {
-                            AdrRus = p.Adr,
-                            AdrLat = p.Adr
-                        });
-                        //_quotationService.Add(new QuotationDTO());
+                        var (bank, branch, quotation, phone) = GetObjects(d);
                         
+                        _bankService.Add(bank);
+                        
+                        //var tempBank = _bankService.GetData().FirstOrDefault(a => a.NameRus == bank.NameRus);
+
+                        //branch.BankDto = tempBank;
+                        //branch.CityDto = city;
+
+                        //var temp = branch;
+
+                        //_branchService.Add(branch);
+
+                        //_bankService.Add(p);
+                        //_quotationService.Add(new QuotationDTO());
+
                     }
 
                     //result.AddRange(_webDataService.GetData(
@@ -83,27 +89,28 @@ namespace BusinessLogic
             return result;
         }
 
-        private void GetObjects(BaseEntityDTO baseEntity)
+        private (BankDTO bank, BranchDTO branch, QuotationDTO quotation, PhoneDTO phone) GetObjects(BaseEntityDTO baseEntity)
         {
-            new BankDTO
-            {
-                NameLat = baseEntity.Bank,
-                NameRus = baseEntity.Bank
-            };
-            new BranchDTO
-            {
-                AdrLat = baseEntity.Adr,
-                AdrRus = baseEntity.Adr
-            };
-            new QuotationDTO
-            {
-                Buy = baseEntity.Buy,
-                Sale = baseEntity.Sale
-            };
-            new PhoneDTO
-            {
-                PhoneNum = baseEntity.Phone
-            };
+            return (
+                new BankDTO
+                {
+                    NameLat = baseEntity.Bank,
+                    NameRus = baseEntity.Bank
+                },
+                new BranchDTO
+                {
+                    AdrLat = baseEntity.Adr,
+                    AdrRus = baseEntity.Adr
+                },
+                new QuotationDTO
+                {
+                    Buy = baseEntity.Buy,
+                    Sale = baseEntity.Sale
+                },
+                new PhoneDTO
+                {
+                    PhoneNum = baseEntity.Phone
+                });
         }
     }
 }

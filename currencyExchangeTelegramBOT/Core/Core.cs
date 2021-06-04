@@ -1,6 +1,8 @@
 ﻿using System;
+using AutoMapper.Configuration.Annotations;
 using BusinessLogic;
 using FluentScheduler;
+using OpenQA.Selenium.Chrome;
 
 namespace Core
 {
